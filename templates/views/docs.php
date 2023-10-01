@@ -1,57 +1,31 @@
 
-		<?php include 'partials/hero.php'; ?>
+		<section class="bg-primary bg-opacity-10 py-5">
+			<div class="container px-5">
+				<div class="row gx-5 justify-content-center">
+					<div class="col-lg-10">
+						<div class="text-center my-5">
+							<h1 class="display-5 fw-bolder text-white mb-2">PHPainfree<code>2</code> Docs</h1>
+							<div class="d-grid gap-3 d-sm-flex justify-content-sm-center mt-4">
+								<a
+									class="github-button"
+									href="https://github.com/Programming-Is-Easy/PHPainfree/fork"
+									data-size="large"
+									aria-label="Fork Programming-Is-Easy/PHPainfree on GitHub"
+								>Fork PHPainfree</a>
 
-		<!-- Features section-->
-        <section class="py-2 border-bottom border-primary" id="features">
-            <div class="container px-2 my-5">
-                <div class="row gx-5">
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-emoji-heart-eyes"></i></div>
-                        <h2 class="h4 fw-bolder">No Complicated Methods</h2>
-                        <p>
-							You already know PHP, so why learn an entirely new way of coding
-							just to use some silly framework that will go out of fashion
-							in a few years?
-						</p>
-						<p>
-							Simple PHP and a tiny library footprint stay
-							out of your way and let you focus on the part of your web app
-							that you need to work on--<strong>your features!</strong>
-						</p>
-                    </div>
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-speedometer"></i></div>
-                        <h2 class="h4 fw-bolder">Ultra Fast</h2>
-                        <p>
-							It's not 2004 anymore. PHP is actually fast as heck, and you can use it
-							to create websites capable of serving millions and millions of requests per hour.
-							However, as soon as you bring a giant web framework into the mix, you're adding
-							all of the overhead of that framework into the mix and slowing down your ability
-							to serve content. 
-						</p>
-						<p>
-							<strong>PHPainfree is intentionally small</strong>. You are a <code>programmer</code>, so
-							program in just what you need. Don't get stuck with a bunch of stuff that someone
-							else has decided that you <strong><em>might</em></strong> need.
-						</p>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-filetype-json"></i></div>
-                        <h2 class="h4 fw-bolder">Fast JSON APIs and <code>htmx</code> Support</h2>
-                        <p>
-							Each controller is capable of ending execution before rendering a full HTML template.
-							This allows you to use your controllers as a RESTful endpoint for a lightning-fast
-							JSON API or to leverage the front-end framework <a href="https://htmx.org">htmx</a> to 
-							send back HTML partials for highly interactive dynamic front-ends.
-						</p>
-                        <a class="text-decoration-none" href="#!">
-							Read the Docs
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+								<a
+									class="github-button"
+									href="https://github.com/Programming-Is-Easy/PHPainfree"
+									data-size="large"
+									data-show-count="true"
+									aria-label="Star Programming-Is-Easy/PHPainfree on GitHub"
+								>Star</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
         <!-- Testimonials section-->
         <section class="bg-secondary bg-opacity-25 py-2 border-bottom border-success" id="quickstart">
             <div class="container px-2 my-5">

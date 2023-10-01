@@ -1,5 +1,3 @@
-
-
 div.code-toolbar{
     position:relative
 }
@@ -20,7 +18,6 @@ div.code-toolbar>.toolbar>.toolbar-item>a{
 }
 
 /* feature styles for buttons */
-
 /* icon copy */
 div.code-toolbar>.toolbar>.toolbar-item>button > span
 {
@@ -64,60 +61,10 @@ div.code-toolbar > .toolbar > .toolbar-item > span {
     box-shadow: none;
 }
 /* end of style override for prismjs */
-/*
-div.code-toolbar > .toolbar > .toolbar-item > span {
-	background: #ff0;
-	border-radius: 0;
-	padding: .5em;
-	font-size: 1em;
-	position: relative;
-	top: -1em;
-	margin-right: 2em;
-}*/
 
-#debug {
-	border: 1px solid #555;
-	padding: 5px 10px;
-	margin: 10px 50px 5px;
-}
-#debug h2 {
-	margin: 2px 5px;
-	padding: 0px;
-}
-#debug h3 {
-	background-color: #ffc;
-	border: 1px solid #777;
-	border-bottom: none;
-	padding: 2px 8px;
-	margin: 4px 40px 0px;
-	cursor: pointer;
-	color: #000;
-}
-#debug h3.closed {
-	background-color: #999;
-	border-bottom: 1px solid #777;
-	margin-bottom: 10px;
-}
-
-#debug .debug_output {
-	background-color: #333;
-	overflow: auto;
-	color: #fff;
-}
-#debug .closed {
-	display: none;
-	border: none;
-}
-#debug .open {
-	display: block;
-	border: 1px solid #333;
-	border-top: none;
-	margin: 0px 40px 4px;
-	padding: 4px 10px;
-}
 #painfree_exec_time {
-	font-size: 14px;
+	font-size: 1em;
 	font-weight: normal;
-	margin-left: 25px;
 	font-family: monospace;
+	float: right;
 }

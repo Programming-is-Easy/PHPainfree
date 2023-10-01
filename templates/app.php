@@ -11,7 +11,7 @@ if ( $App->htmx && file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.p
 		<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 
 		<!-- bootstrap used in example page. Not required by PHPainfree -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
 		<!-- Core theme CSS (includes Bootstrap)-->
 		<link href="/css/styles.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
@@ -56,10 +56,19 @@ if ( $App->htmx && file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.p
 	}
 ?>
 
+
 <?php
 		include 'footer.php';	
 ?>
 
+<?php
+	// TODO: If you're going to use a debug template in a production environment,
+	// you will want to do a permissions check here to only show it to people with
+	// "developer" permissions in your product.
+	if ( isset($_ENV['ENVIRONMENT']) && $_ENV['ENVIRONMENT'] === 'development' ) {
+		include 'debug.php';
+	}
+?>
 	</body>
 </html>
 

@@ -17,23 +17,33 @@
 
 	$Painfree->debug('EXAMPLE', 'You can basically pass anything to $Painfree->debug().');
 ?>
-<div id="debug">
-	<h2>
-		PHPainfree Debugging Console
-		<span id="painfree_exec_time">[exec: <?php echo sprintf('%0.4f', (microtime(true) - $__painfree_start_time)) . 's'; ?>]</span>
-	</h2>
+<section class="bg-primary bg-opacity-10 py-2 border-top border-primary" id="phpainfree_debug">
+	<div class="container-fluid px-5 my-2">
+		<div class="mb-2">
+			<h2 class="fw-bolder">
+				PHPainfree Debugging Console
+				<code id="painfree_exec_time">[exec: <?php echo sprintf('%0.4f', (microtime(true) - $__painfree_start_time)) . 's'; ?>]</code>
+			</h2>
+		</div>
+		<div class="row gx-5 justify-content-center">
+			<div class="col-lg-12">
 <?php
 	$debug_cnt = 0;
 	foreach ( $Painfree->__debug as $heading => $obj_dump ) {
 		$debug_cnt = $debug_cnt + 1;
 ?>
-	<h3 id="debug_heading_<?php echo $debug_cnt; ?>" class="debug_heading open">
-		<?php echo $debug_cnt; ?>. <?php echo $heading; ?>
-	</h3>
-	<div id="debug_<?php echo $debug_cnt; ?>" class="debug_output open">
-		<pre><strong><?php echo $heading; ?></strong> = <?php echo $obj_dump; ?></pre>
-	</div>
+				<div class="card bg-dark border-warning mb-4">
+					<div class="card-header bg-danger bg-opacity-10">
+						<h4 class="my-2"><?= $debug_cnt; ?>. <?= $heading; ?></h4>
+					</div>
+					<div class="card-body p-4">
+						<pre><code class="language-php"><?= $heading; ?> = <?= $obj_dump; ?></code></pre>
+					</div>
+				</div>
 <?php
 	}
 ?>
-</div>
+			</div>
+		</div>
+	</div>
+</section>
