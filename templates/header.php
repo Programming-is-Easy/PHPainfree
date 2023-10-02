@@ -15,6 +15,9 @@
                         <li class="nav-item">
 							<a class="nav-link <?= $App->view === 'examples' ? 'active' : ''; ?>" href="/examples">Examples</a>
 						</li>
+                        <li class="nav-item">
+							<a class="nav-link" href="https://github.com/Programming-is-Easy/PHPainfree/issues">Issue Tracker</a>
+						</li>
                     </ul>
                 </div>
             </div>

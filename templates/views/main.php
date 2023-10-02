@@ -26,11 +26,12 @@
 							It's not 2004 anymore. PHP is actually fast as heck, and you can use it
 							to create websites capable of serving millions and millions of requests per hour.
 							However, as soon as you bring a giant web framework into the mix, you're adding
-							all of the overhead of that framework into the mix and slowing down your ability
-							to serve content. 
+							all of the overhead of that framework into your application 
+							and slowing down your ability to serve content. 
 						</p>
 						<p>
-							<strong>PHPainfree is intentionally small</strong>. You are a <code>programmer</code>, so
+							<strong>PHPainfree is intentionally small</strong>. You are a 
+							<span class="fw-bold text-warning">programmer</span>, so
 							program in just what you need. Don't get stuck with a bunch of stuff that someone
 							else has decided that you <strong><em>might</em></strong> need.
 						</p>
