@@ -8,6 +8,9 @@ Author: Eric Ryan Harrison
 	http://ericharrison.info
 ****************************************************************/
 
+$dotenv = Dotenv\Dotenv::createImmutable(realpath('../'));
+$dotenv->load();
+
 /*************************** Edit Me ***************************/
 // WARNING: $Painfree looks for a variable called $PainfreeConfig
 // provided by a file called PainfreeConfig.php. It must exist.
