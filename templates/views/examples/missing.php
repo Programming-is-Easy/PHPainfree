@@ -1,4 +1,3 @@
-<title>Missing Document - Documentation | PHPainfree2</title>
 
 <section class="bg-danger bg-opacity-25 py-2 border-bottom border-success">
 	<div class="container px-2 my-5">

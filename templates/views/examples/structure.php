@@ -1,4 +1,3 @@
-<title>Program Structure - Documentation | PHPainfree2</title>
 
 <div class="text-center mt-5 mb-5">
 	<h2 class="fw-bolder">PHPainfree<code>2</code> Program Structure</h2>

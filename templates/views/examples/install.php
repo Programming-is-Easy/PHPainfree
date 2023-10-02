@@ -1,4 +1,3 @@
-<title>Installation - Documentation | PHPainfree2</title>
 
 <div class="row">
 	<div class="col-lg-5">

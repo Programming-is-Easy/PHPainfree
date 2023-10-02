@@ -50,6 +50,7 @@
 										hx-get="/docs/quickstart"
 										hx-target="#doc_content"
 										hx-push-url="true"
+										hx-swap-oob="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>Quickstart</a>
 								</li>
@@ -59,6 +60,7 @@
 										hx-get="/docs/structure"
 										hx-target="#doc_content"
 										hx-push-url="true"
+										hx-swap-oob="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>Structure</a>
 								</li>
@@ -68,6 +70,7 @@
 										hx-get="/docs/deploy"
 										hx-target="#doc_content"
 										hx-push-url="true"
+										hx-swap-oob="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>Deploying</a>
 								</li>
@@ -80,6 +83,7 @@
 										hx-get="/docs/painfree-application-controller"
 										hx-target="#doc_content"
 										hx-push-url="true"
+										hx-swap-oob="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>ApplicationController</a>
 								</li>
@@ -89,6 +93,7 @@
 										hx-get="/docs/painfree-base-view"
 										hx-target="#doc_content"
 										hx-push-url="true"
+										hx-swap-oob="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>BaseView</a>
 								</li>
@@ -101,6 +106,7 @@
 										hx-get="/docs/painfree-safe"
 										hx-target="#doc_content"
 										hx-push-url="true"
+										hx-swap-oob="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->safe()</span></a>
 								</li>
@@ -110,6 +116,7 @@
 										hx-get="/docs/painfree-debug"
 										hx-target="#doc_content"
 										hx-push-url="true"
+										hx-swap-oob="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->debug()</span></a>
 								</li>
@@ -120,6 +127,7 @@
 										hx-get="/docs/painfree-logic"
 										hx-target="#doc_content"
 										hx-push-url="true"
+										hx-swap-oob="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->logic()</span></a>
 								</li>
@@ -129,6 +137,7 @@
 										hx-get="/docs/painfree-view"
 										hx-target="#doc_content"
 										hx-push-url="true"
+										hx-swap-oob="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->view()</span></a>
 								</li>
@@ -138,6 +147,7 @@
 										hx-get="/docs/painfree-autoload"
 										hx-target="#doc_content"
 										hx-push-url="true"
+										hx-swap-oob="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->autoload()</span></a>
 								</li>

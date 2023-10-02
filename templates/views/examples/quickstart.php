@@ -1,4 +1,3 @@
-<title>Quickstart - Documentation | PHPainfree2</title>
 
 <section class="bg-dark bg-opacity-25 py-2 border-bottom border-success" id="quickstart">
 	<div class="container px-2 my-5">

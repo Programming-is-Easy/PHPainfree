@@ -1,17 +1,16 @@
-<title>Deploy - Documentation | PHPainfree2</title>
 
 <section class="bg-dark bg-opacity-25 py-2 border-bottom border-success" id="quickstart">
 	<div class="container px-2 my-5">
 		<div class="text-center mb-5">
-			<h2 class="fw-bolder">Deploying</h2>
-			<p class="lead mb-0">Production-ready in minutes (for some platforms)</p>
+			<h2 class="fw-bolder">PHPainfree<code>2</code> Examples</h2>
+			<p class="lead mb-0">Look at how easy it is to build things!</p>
 		</div>
 		<div class="row gx-5 justify-content-center">
 			<div class="col-lg-10">
 				<!-- Step 1 -->
 				<div class="card bg-dark border-warning mb-4">
 					<div class="card-header bg-primary bg-opacity-10">
-						<h4 class="my-2">Apache/Linux Instructions</h4>
+						<h4 class="my-2">Coming Soon!</h4>
 					</div>
 					<div class="card-body p-4">
 						<pre

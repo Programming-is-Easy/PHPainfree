@@ -27,7 +27,11 @@
 
 // default sub-view to render for empty requests to /docs
 $this->data['doc'] = 'quickstart'; 
-
+$this->title('Documentation | ', true);
 if ( ! empty($this->id) ) {
 	$this->data['doc'] = $this->id;
+	$this->title(ucwords($this->data['doc']) . ' - ', true);
 }
+
+
+

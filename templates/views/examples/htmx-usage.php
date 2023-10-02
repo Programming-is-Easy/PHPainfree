@@ -1,8 +1,7 @@
-<title>Installation - Documentation | PHPainfree2</title>
 
 <div class="row">
 	<div class="col-lg-5">
-		Installation Instructions!
+		Using htmx!
 	</div>
 	<div class="col-lg-7">
 		<!-- Step 1 -->
