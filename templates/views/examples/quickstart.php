@@ -17,7 +17,7 @@
 							class="command-line"
 							data-prompt="$"
 							data-continuation-str="\"
-						><code class="language-bash">git clone --depth=1 git@github.com:februaryfalling/PHPainfree.git \
+						><code class="language-bash">git clone --depth=1 git@github.com:Programming-is-Easy/PHPainfree.git \
 cd PHPainfree && rm -rf .git && cp development.env .env</code></pre>
 						<p class="lead">
 							Grab the current source code from Github, delete the <code>.git/</code> folder,
