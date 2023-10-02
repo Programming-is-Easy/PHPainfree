@@ -1,5 +1,15 @@
-
-		<section class="bg-primary bg-opacity-10 py-5">
+<?php
+	$file_path = "{$App->BASE_PATH}/templates/views/docs/{$App->data['doc']}.php";
+	if ( $App->htmx && ! $App->htmx_boosted && file_exists($file_path) ) {
+	die('<pre>'.$file_path.'='.print_r($App,true).'</pre>');
+		include_once "docs/{$App->data['doc']}.php";
+		die();
+	} else if ( $App->htmx && ! $App->htmx_boosted && ! file_exists($file_path) ) {
+		include_once "docs/missing.php";
+		die();
+	}
+?>
+		<section class="bg-primary bg-opacity-10 py-2">
 			<div class="container px-5">
 				<div class="row gx-5 justify-content-center">
 					<div class="col-lg-10">
@@ -27,80 +37,145 @@
 			</div>
 		</section>
         <!-- Testimonials section-->
-        <section class="bg-secondary bg-opacity-25 py-2 border-bottom border-success" id="quickstart">
-            <div class="container px-2 my-5">
-                <div class="text-center mb-5">
-                    <h2 class="fw-bolder">Quickstart Guide</h2>
-                    <p class="lead mb-0">Start building something cool in just a few minutes.</p>
-                </div>
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-10">
-                        <!-- Step 1 -->
-                        <div class="card bg-dark border-warning mb-4">
-							<div class="card-header bg-primary bg-opacity-10">
-								<h4 class="my-2">1. Grab the Source Code</h4>
-							</div>
-                            <div class="card-body p-4">
-								<pre
-									class="command-line"
-									data-prompt="$"
-									data-continuation-str="\"
-								><code class="language-bash">git clone --depth=1 git@github.com:februaryfalling/PHPainfree.git \
-cd PHPainfree && rm -rf .git && cp development.env .env</code></pre>
-								<p class="lead">
-									Grab the current source code from Github, delete the <code>.git/</code> folder,
-									and copy the <code>development.env</code> file into <code>.env</code>.
-								</p>
-								<p>
-									The <code>.env</code> file will contain sensitive passwords and other essential private items (API keys, etc)
-									and should <strong>never</strong> be checked into version control. A minimalistic version is included
-									with the PHPainfree source code to allow you to connect to the Docker database configured in the 
-									local development environment.
-								</p>
-                            </div>
-                        </div>
-                        <!-- Step 2 -->
-                        <div class="card bg-dark border-warning mb-4">
-							<div class="card-header bg-primary bg-opacity-10">
-								<h4 class="my-2">2. Turn on the Docker Server</h4>
-							</div>
-                            <div class="card-body p-4">
-								<pre
-									class="command-line"
-									data-prompt="$"
-									data-continuation-str="\"
-								><code class="language-bash">sudo docker compose up</code></pre>
-								<p class="lead">
-									PHPainfree V2 comes with a Docket setup for speedy development. By default, the <code>docker-compose.yml</code>
-									configuration will start up three containers:
-								</p>
-								<ul>
-									<li><code>phpainfree_dev</code> - Apache+PHP container running your application.</li>
-									<li><code>phpainfree_db</code> - MySQL container with a persistent storage volume.</li>
-									<li><code>phpainfree_phpmyadmin</code> - PHPMyAdmin web application connected to <code>phpainfree_db</code>.</li>
-								</ul>
-                            </div>
-                        </div>
-                        <!-- Step 3 -->
-                        <div class="card bg-dark border-warning mb-4">
-							<div class="card-header bg-primary bg-opacity-10">
-								<h4 class="my-2">3. Code!</h4>
-							</div>
-                            <div class="card-body p-4">
-								<p class="lead">
-									It's really as easy as that! You should have a webserver running the source
-									code in this folder located at <a href="http://localhost:8888">http://localhost:8888/</a>
-									and you should see a complete clone of this website.
-								</p>
-								<p>
-									From here you can use this website as a starting point for simple web development
-									projects, or you can wipe out almost everything and start your new project from scratch.
-									PHPainfree has never been an "opinionated" framework, and really just provides
-									some lightweight routing automation and some tools for persistent database connections.
-								</p>
-                            </div>
-                        </div>
-                    </div>
+        <section class="bg-secondary bg-opacity-25 border-bottom border-success" id="documentation">
+            <div class="container-fluid">
+                <div class="row justify-content-center border-top">
+					<div class="col-lg-2 bg-dark">
+						<div class="bg-dark sticky-top p-2 overflow-auto pt-4" style="height:90vh; top:4.2em;">
+							<h4>PHPainfree<code>2</code></h4>
+							<ul class="fs-5" id="painfree_navigation_links" hx-on:click="htmx.findAll('li.nav-item.active').forEach(el => htmx.removeClass(el, 'active'));">
+								<li class="nav-item <?= $App->data['doc'] === 'quickstart' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/quickstart"
+										hx-get="/docs/quickstart"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									>Quickstart</a>
+								</li>
+								<li class="nav-item <?= $App->data['doc'] === 'structure' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/structure"
+										hx-get="/docs/structure"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									>Structure</a>
+								</li>
+								<li class="nav-item <?= $App->data['doc'] === 'deploy' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/deploy"
+										hx-get="/docs/deploy"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									>Deploying</a>
+								</li>
+							</ul>
+							<h5>Components</h5>
+							<ul class="fs-6" id="painfree_component_links" hx-on:click="htmx.findAll('li.nav-item.active').forEach(el => htmx.removeClass(el, 'active'));">
+								<li class="nav-item <?= $App->data['doc'] === 'painfree-application-controller' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/painfree-application-controller"
+										hx-get="/docs/painfree-application-controller"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									>ApplicationController</a>
+								</li>
+								<li class="nav-item <?= $App->data['doc'] === 'painfree-base-view' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/painfree-base-view"
+										hx-get="/docs/painfree-base-view"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									>BaseView</a>
+								</li>
+							</ul>
+							<h5>Methods</h5>
+							<ul class="fs-6" id="painfree_method_links" hx-on:click="htmx.findAll('li.nav-item.active').forEach(el => htmx.removeClass(el, 'active'));">
+								<li class="nav-item <?= $App->data['doc'] === 'painfree-safe' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/painfree-safe"
+										hx-get="/docs/painfree-safe"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									><span class="font-monospace">$Painfree->safe()</span></a>
+								</li>
+								<li class="nav-item <?= $App->data['doc'] === 'painfree-debug' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/painfree-debug"
+										hx-get="/docs/painfree-debug"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									><span class="font-monospace">$Painfree->debug()</span></a>
+								</li>
+								<hr>
+								<li class="nav-item <?= $App->data['doc'] === 'painfree-logic' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/painfree-logic"
+										hx-get="/docs/painfree-logic"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									><span class="font-monospace">$Painfree->logic()</span></a>
+								</li>
+								<li class="nav-item <?= $App->data['doc'] === 'painfree-view' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/painfree-view"
+										hx-get="/docs/painfree-view"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									><span class="font-monospace">$Painfree->view()</span></a>
+								</li>
+								<li class="nav-item <?= $App->data['doc'] === 'painfree-autoload' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/painfree-autoload"
+										hx-get="/docs/painfree-autoload"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									><span class="font-monospace">$Painfree->autoload()</span></a>
+								</li>
+							</ul>
+
+							<h4>htmx Support</h4>
+							<ul class="fs-5" id="htmx_links" hx-on:click="htmx.findAll('li.nav-item.active').forEach(el => htmx.removeClass(el, 'active'));">
+								<li class="nav-item <?= $App->data['doc'] === 'htmx' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/htmx"
+										hx-get="/docs/htmx"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									>Overview</a>
+								</li>
+								<li class="nav-item <?= $App->data['doc'] === 'htmx-usage' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/htmx-usage"
+										hx-get="/docs/htmx-usage"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+									>Usage</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-10 bg-dark pt-2 border-start" id="doc_content">	
+					<?php
+						if ( file_exists($file_path) ) {
+							include_once "docs/{$App->data['doc']}.php";
+						} else {
+							include_once "docs/missing.php";
+						}
+					?>
+					</div> <!-- end of #doc_content -->
+
                 </div>
             </div>
         </section>

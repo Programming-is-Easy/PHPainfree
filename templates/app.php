@@ -1,6 +1,26 @@
 <?php
-if ( $App->htmx && file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.php") ) {
-	include_once "views/{$App->view}.php";
+if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.php") ) {
+	// If we are an htmx request and the "view" variable exists in the top-level
+	// templates folder, render that as an HTMX snippet.
+	//
+	// If we are an htmx request and there is a "sub-view" defined that lives
+	// inside a folder, render _THAT_ instead of the full top-level snippet.
+	//
+	// In _this_ application, we're overriding $App->id to act as our default
+	// "sub-view" route, but you should feel free to write whatever type of 
+	// routing architecture that you want.
+	//
+	// This example requires that a top-level /templates/views/{$view}.php file 
+	// exists **AND** a top-level /templates/views/{$view}/{$id}.php file to
+	// exist for this magic to occur. 
+	//
+	// Each application built with PHPainfree should design their routing and
+	// template relationships however best suits that product.
+	if ( file_exists("{$App->BASE_PATH}/templates/views/{$App->view}/{$App->id}.php") ) {
+		include_once "views/{$App->view}/{$App->id}.php";
+	} else {
+		include_once "views/{$App->view}.php";
+	}
 } else { 
 ?>
 <!DOCTYPE html>
@@ -41,7 +61,7 @@ if ( $App->htmx && file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.p
 	}
 ?>
 
-		<link href="/css/debug.css" rel="stylesheet" />
+		<link href="/css/painfree_development.css" rel="stylesheet" />
 	</head>
 	<body id="app-body" class="bg-dark text-light">
 <?php

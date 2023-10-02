@@ -17,12 +17,13 @@
 
 		// if HX-Request header is sent, we're an htmx-powered request
 		public bool $htmx = false;
+		public bool $htmx_boosted = false;
 
 		// routing defaults
 		public string $route;
-		public string $view;
-		public string $id;
-		public string $action;
+		public string $view   = '';
+		public string $id     = '';
+		public string $action = '';
 
 		// controller/view data storage
 		public array $data    = []; // publicly exposed "json" data
@@ -62,6 +63,9 @@
 				$headers = apache_request_headers();
 				if ( isset($headers['HX-Request']) && $headers['HX-Request'] === 'true' ) {
 					$this->htmx = true;
+				}
+				if ( isset($headers['HX-Boosted']) && $headers['HX-Boosted'] === 'true' ) {
+					$this->htmx_boosted = true;
 				}
 				if ( isset($headers['Content-Type']) && $headers['Content-Type'] === 'application/json' ) {
 					header('Content-Type: application/json; charset=utf-8');

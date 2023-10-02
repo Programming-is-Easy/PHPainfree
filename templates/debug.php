@@ -9,6 +9,8 @@
 	// this is an example just for fun. You can call $Painfree->debug()
 	// wherever you want in your application and it would theoretically
 	// be displayed in this template.
+	$Painfree->debug('App', $App);
+	$Painfree->debug('Painfree', $Painfree);
 	$Painfree->debug('DebugExamples', 'Please be aware that there are several $Painfree->debug() calls made in templates/debug.php to be used as examples. You should probably remove them.');
 	$TestArray = array('this_is' => 'a simple dummy array.', 'example' => array(1,2,3));
 	$Painfree->debug('$TestArray', $TestArray);
@@ -22,7 +24,7 @@
 		<div class="mb-2">
 			<h2 class="fw-bolder">
 				PHPainfree Debugging Console
-				<code id="painfree_exec_time">[exec: <?php echo sprintf('%0.4f', (microtime(true) - $__painfree_start_time)) . 's'; ?>]</code>
+				<code id="painfree_exec_time" class="px-4 text-secondary">[exec: <span class="text-success"><?= sprintf('%0.4f', (microtime(true) - $__painfree_start_time)) . 's'; ?></span>]</code>
 			</h2>
 		</div>
 		<div class="row gx-5 justify-content-center">

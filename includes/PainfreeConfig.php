@@ -32,7 +32,16 @@ $PainfreeConfig = array(
 	// each element in the array is a DB server to try. If one
 	// fails to connect, it will roll-over to the next
 	// leave the array empty for no DB connection
-	'Database' => array(),
+	// 'Database' => array(),
+	'Database' => array(
+		'PrimaryDB' => array(
+			'host'   => $_ENV['MYSQL_HOST'],
+			'user'   => $_ENV['MYSQL_USER'],
+			'pass'   => $_ENV['MYSQL_PASSWORD'],
+			'schema' => $_ENV['MYSQL_DATABASE'],
+			'port'   => $_ENV['MYSQL_PORT'],
+		),
+	),
 
 	/*
 	// This is an example Database configuration with two DB connections
