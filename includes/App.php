@@ -13,7 +13,7 @@
 	 * App Singleton
 	 */
 	class App {
-		private string $title = 'PHPainfree';
+		private string $title = 'PHPainfree2';
 
 		// if HX-Request header is sent, we're an htmx-powered request
 		public bool $htmx = false;
