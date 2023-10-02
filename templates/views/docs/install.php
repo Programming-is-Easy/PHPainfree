@@ -16,7 +16,7 @@
 					data-prompt="$"
 					data-continuation-str="\"
 				><code class="language-bash">git clone --depth=1 git@github.com:Programming-is-Easy/PHPainfree.git \
-cd PHPainfree && rm -rf .git && cp development.env .env</code></pre>
+&& cd PHPainfree && rm -rf .git && cp development.env .env</code></pre>
 				<p class="lead">
 					Grab the current source code from Github, delete the <code>.git/</code> folder,
 					and copy the <code>development.env</code> file into <code>.env</code>.
