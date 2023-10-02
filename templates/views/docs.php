@@ -41,7 +41,7 @@
             <div class="container-fluid">
                 <div class="row justify-content-center border-top">
 					<div class="col-lg-2 bg-dark">
-						<div class="bg-dark sticky-top p-2 overflow-auto pt-4" style="height:90vh; top:4.2em;">
+						<div class="bg-dark sticky-top p-2 overflow-auto pt-4" style="min-height:90vh; top:4.2em;">
 							<h4>PHPainfree<code>2</code></h4>
 							<ul class="fs-5" id="painfree_navigation_links" hx-on:click="htmx.findAll('li.nav-item.active').forEach(el => htmx.removeClass(el, 'active'));">
 								<li class="nav-item <?= $App->data['doc'] === 'quickstart' ? 'active' : ''; ?>">
