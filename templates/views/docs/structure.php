@@ -704,7 +704,7 @@ class PHPainfree {
 			<div class="card-header">templates/app.php</div>
 			<div class="card-body p-4">
 
-<pre><code class="language-php">
+<pre class="line-numbers"><code class="language-php">
 &lt;?php
 if ( 
 	$App->htmx && 
@@ -782,6 +782,32 @@ if (
 		</p>
 	</div>
 	<div class="col-lg-6">
+		<div class="card bg-dark border-warning mb-4">
+			<div class="card-header">templates/app.php</div>
+			<div class="card-body p-4">
+
+<pre class="line-numbers" data-start="66"><code class="language-php">
+	&lt;body id="app-body" class="bg-dark text-light">
+&lt;?php
+		include 'header.php';	
+?>
+
+&lt;?php
+	if ( file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.php") ) {
+		include "views/{$App->view}.php";
+	} else {
+		include "views/404.php";
+	}
+?>
+
+&lt;?php
+		include 'footer.php';	
+?>
+
+</code></pre>
+
+			</div>
+		</div>
 	</div>
 </div>
 
