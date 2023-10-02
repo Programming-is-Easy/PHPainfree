@@ -41,7 +41,7 @@ cd PHPainfree && rm -rf .git && cp development.env .env</code></pre>
 					data-continuation-str="\"
 				><code class="language-bash">sudo docker compose up</code></pre>
 				<p class="lead">
-					PHPainfree V2 comes with a Docket setup for speedy development. By default, the <code>docker-compose.yml</code>
+					PHPainfree V2 comes with a Docker setup for speedy development. By default, the <code>docker-compose.yml</code>
 					configuration will start up three containers:
 				</p>
 				<ul>
