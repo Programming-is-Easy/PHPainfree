@@ -76,7 +76,6 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
 	}
 ?>
 
-
 <?php
 		include 'footer.php';	
 ?>

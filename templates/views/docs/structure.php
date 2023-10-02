@@ -409,6 +409,12 @@ class PHPainfree {
 				</blockquote>
 			</div>
 		</div>
+		<h4 class="mt-4 mb-4">Further Exploration</h4>
+		<p>
+			The ApplicationController is explored in detail in 
+			<a href="/docs/painfree-application-controller">/docs/painfree-application-controller</a>,
+			but we'll quickly touch on the "magic" that happens here as a part of the request.
+		</p>
 	</div>
 	<div class="col-lg-6">
 		<div class="card bg-dark border-warning mb-4">
@@ -450,155 +456,10 @@ class PHPainfree {
 
 <div class="row mb-4 mt-4">
 	<div class="col-lg-6">
-		<h5 class="mt-4">Other Classes</h5>
-		<p>
-			Directly below the instantiation, you can see a few lines commented
-			out with a recommendation for how to build these types of ApplicationControllers.
-		</p>
-		<p>
-			A common PHPainfree<code>2</code> design pattern is to attach several
-			other required object Singletons to the primary ApplicationController
-			Singleton. In the example code that is commented out, a 
-			<code class="language-php">class User</code> singleton is imported
-			and instantiated as a public member of the <code>$App</code> instance.
-		</p>
-		<p>
-			Because this example ApplicationController uses the <code>$App</code>
-			instance as the "application state" and execution director, it would
-			be typical to have several such instances defined and attached to 
-			the <code>$App</code> instance at run-time. There are several such
-			pre-defined example classes available in this repository, and you
-			can learn more about them at <a href="/docs/painfree-examples">/docs/painfree-examples</a>.
-		</p>
-	</div>
-	<div class="col-lg-6">
-		<div class="card bg-dark border-warning mb-4">
-			<div class="card-header">includes/App.php</div>
-			<div class="card-body p-4">
-				<pre class="line-numbers" data-start="4" data-line="5-6" data-line-offset="4"><code class="language-php">
-	$App = new App();
-	// any internal classes should be defined below
-	// require_once 'includes/App/User.php'; 
-	// $App->User = new User();
-	
-	// start routing and handle the request
-	$App->route();
-				</code></pre>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- Route() function -->
-<div class="row mb-4 mt-5">
-	<div class="col-lg-6">
-		<h4 class="">
-			<code class="language-php">$App->route()</code>
-		</h4>
-		<p class="m-4">
-			Finally, on line 10, a tiny bit of magic happens with the call to
-			<code class="language-php">$App->route()</code>. This code, defined
-			inside the class is an example of an ApplicationController consuming
-			the structured route of <code class="language-php">$Painfree->route</code> 
-			to dynamically handle requests and pass them to the correct controller.
-		</p>
-		<p>
-			Using this function, or one like it, allows PHPainfree<code>2</code>
-			projects to orchestrate complex behaviors at URLs defined entirely
-			by the name of the first value in the URL path.
-		</p>
-	</div>
-	<div class="col-lg-6">
-		<div class="card bg-dark border-warning mb-4">
-			<div class="card-header">includes/App.php</div>
-			<div class="card-body p-4">
-				<pre class="line-numbers" data-line="10" data-start="9" data-line-offset="10"><code class="language-php">
-	// start routing and handle the request
-	$App->route();
-
-	/**
-	 * App Singleton
-	 */
-	class App {
-		// ... 
-				</code></pre>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row mb-4 mt-5">
-	<div class="col-lg-6">
-		<h4 class="">
-			<code class="language-php">$App-&gt;route()</code> ➡️
-			<code class="language-php">$this-&gt;__setRoutes()</code>
-		</h4>
-		<p class="m-4">
-			Inside <code>$App->route()</code>, the first thing we do is call the
-			<code>__setRoutes()</code> private method. This function takes the route
-			that PHPainfree<code>2</code> has defined and splits it up into various
-			individual components. This ApplicationController has defined a routing
-			format as: <code>/$VIEW/$ID/$ACTION</code>, so <code>__setRoutes()</code>
-			examines <code>$Painfree->route</code> and assigns each piece to public
-			member variables in <code>$App</code>
-		</p>
-		<div class="card bg-dark border-warning mb-4">
-			<div class="card-header">includes/App.php, <code class="language-php">App::setRoutes()</code></div>
-			<div class="card-body p-4">
-				<pre class="line-numbers" data-start="81"><code class="language-php">
-		private function __setRoutes() : void {
-			$routes = explode('/', $this->route);
-
-			// default route is set in PainfreeConfig.php
-			if ( count($routes) ) {
-				$this->view = array_shift($routes);
-			} else {
-				$this->view = $this->route;
-			}
-
-			if ( count($routes) ) {
-				$this->id = array_shift($routes);
-			}
-
-			if ( count($routes) ) {
-				$this->action = array_shift($routes);
-			}
-		}
-				</code></pre>
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-6">
-		<div class="card bg-dark border-warning mb-4">
-			<div class="card-header">includes/App.php</div>
-			<div class="card-body p-4">
-				<pre class="line-numbers" data-line="56" data-start="45" data-line-offset="45"><code class="language-php">
-		/**
-		 * $App->route() takes the $Painfree->route value and attempts
-		 * to load a controller from `/includes/Controllers/`.
-		 *
-		 * @return void
-		 */
-		public function route() : void {
-			global $Painfree;
-			
-			// the default routing pattern is
-			// /:VIEW/:ID/:ACTION
-			$this->__setRoutes();
-			
-			header('X-Frame-Options: SAMEORIGIN');
-				</code></pre>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row mb-4 mt-5">
-	<div class="col-lg-6">
-		<h4 class="">
+		<h4 class="mt-4 mb-4">
 			"Magic" Routing
 		</h4>
-		<p class="m-4">
+		<p>
 			Now that the route variables have been prepared, the <code>route()</code>
 			method does the next four pieces of magic in a few short lines of code.
 		</p>
@@ -626,6 +487,35 @@ class PHPainfree {
 				was sent with the URL, and if so, set the response Content-Type and 
 				immediately die and send back the contents of <code class="language-php">$this->data</code>
 				encoded as JSON.
+			</li>
+		</ol>
+		<h4 class="mt-4 mb-4">
+			End of <code class="language-php">$App->route() : void;</code>
+		</h4>
+		<p>
+			In the case of an API JSON request, execution will immediately halt
+			and output the contents of <code class="language-php">$App->data</code>
+			as a JSON blob. In all other cases, execution returns to 
+			<code>$Painfree</code> to render and load the templates.
+		</p>
+		<p>
+			In this ApplicationController, we leave execution having performed these
+			important tasks:
+		</p>
+		<ol>
+			<li>
+				Processed the URL into <code class="language-php">$App->view</code>,
+				<code class="language-php">$App->id</code>, and 
+				<code class="language-php">$App->action</code>.
+			</li>
+			<li>
+				Executed any application-specific controller code found at 
+				<code class="language-php">includes/Controllers/{$App->view}.php</code>.
+			</li>
+			<li>
+				Set any special boolean application state variables for <code>htmx</code>
+				in <code class="language-php">$App->htmx</code> and 
+				<code class="language-php">$App->htmx_boosted</code>.
 			</li>
 		</ol>
 	</div>
@@ -665,7 +555,6 @@ class PHPainfree {
 	</div>
 </div>
 
-
 <div class="row mb-4 mt-5">
 	<div class="col-lg-6">
 		<h4 class="">
@@ -686,6 +575,62 @@ class PHPainfree {
 			on the URL. In PHPainfree<code>2</code>, this template also has code to handle
 			<a href="https://htmx.org">htmx</a> partial templates.
 		</p>
+		<h4 class="mt-4 mb-4">
+			Dynamic View Template Loading
+		</h4>
+		<p class="m-4">
+			Inside of <code>templates/app.php</code> in the meat of our web template, 
+			we'll load a template file in the <code>template/views/</code> directory
+			if one exists with the same name as the value stored in 
+			<code class="language-php">$App->view</code>.
+		</p>
+		<p>
+			In PainfreeConfig, we have our <code>DefaultRoute</code> parameter
+			defined as <code>"main"</code>, so our application will serve
+			<code>templates/views/main.php</code> for any request to either
+			<code>http://hostname.com/</code> (no path) as well as explictly called
+			like <code>http://hostname.com/main</code>. The value of that view, <code>"main"</code>
+			automatically loads:
+		</p>
+		<ul>
+			<li class="font-monospace">includes/Controllers/<code>main</code>.php</li>
+			<li class="font-monospace">templates/views/<code>main</code>.php</li>
+		</ul>
+		<p class="lead">
+			This is one of the designs that makes developing projects with
+			PHPainfree<code>2</code> so quick. Adding new pages is as simple as
+			dropping a file in the <code>includes/Controllers/</code> folder and
+			<code>templates/views/</code> folder. And as you develop more complicated
+			applications, allowing all of your Controller code to serve as the
+			business logic for your REST JSON API, you're able to do a lot more
+			with a lot less duplication.
+		</p>
+		<div class="card bg-dark border-warning mb-4">
+			<div class="card-header">templates/app.php</div>
+			<div class="card-body p-4">
+
+<pre class="line-numbers" data-start="66"><code class="language-php">
+	&lt;body id="app-body" class="bg-dark text-light">
+&lt;?php
+		include 'header.php';	
+?>
+
+&lt;?php
+	if ( file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.php") ) {
+		include "views/{$App->view}.php";
+	} else {
+		include "views/404.php";
+	}
+?>
+
+&lt;?php
+		include 'footer.php';	
+?>
+
+</code></pre>
+
+			</div>
+		</div>
 	</div>
 	<div class="col-lg-6">
 		<div class="card bg-dark border-warning mb-4">
@@ -747,67 +692,3 @@ if (
 		</div>
 	</div>
 </div>
-
-<div class="row mb-4 mt-5">
-	<div class="col-lg-6">
-		<h4 class="">
-			Dynamic View Template Loading
-		</h4>
-		<p class="m-4">
-			Inside of <code>templates/app.php</code> in the meat of our web template, 
-			we'll load a template file in the <code>template/views/</code> directory
-			if one exists with the same name as the value stored in 
-			<code class="language-php">$App->view</code>.
-		</p>
-		<p>
-			In PainfreeConfig, we have our <code>DefaultRoute</code> parameter
-			defined as <code>"main"</code>, so our application will serve
-			<code>templates/views/main.php</code> for any request to either
-			<code>http://hostname.com/</code> (no path) as well as explictly called
-			like <code>http://hostname.com/main</code>. The value of that view, <code>"main"</code>
-			automatically loads:
-		</p>
-		<ul>
-			<li class="font-monospace">includes/Controllers/<code>main</code>.php</li>
-			<li class="font-monospace">templates/views/<code>main</code>.php</li>
-		</ul>
-		<p class="lead">
-			This is one of the designs that makes developing projects with
-			PHPainfree<code>2</code> so quick. Adding new pages is as simple as
-			dropping a file in the <code>includes/Controllers/</code> folder and
-			<code>templates/views/</code> folder. And as you develop more complicated
-			applications, allowing all of your Controller code to serve as the
-			business logic for your REST JSON API, you're able to do a lot more
-			with a lot less duplication.
-		</p>
-	</div>
-	<div class="col-lg-6">
-		<div class="card bg-dark border-warning mb-4">
-			<div class="card-header">templates/app.php</div>
-			<div class="card-body p-4">
-
-<pre class="line-numbers" data-start="66"><code class="language-php">
-	&lt;body id="app-body" class="bg-dark text-light">
-&lt;?php
-		include 'header.php';	
-?>
-
-&lt;?php
-	if ( file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.php") ) {
-		include "views/{$App->view}.php";
-	} else {
-		include "views/404.php";
-	}
-?>
-
-&lt;?php
-		include 'footer.php';	
-?>
-
-</code></pre>
-
-			</div>
-		</div>
-	</div>
-</div>
-

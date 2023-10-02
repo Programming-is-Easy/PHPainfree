@@ -62,7 +62,7 @@ class PHPainfree {
 		for display. This method will probably need to evolve over time to
 		provide more robust output sanitization.
 	*/
-	public function safe($unsafe='') {
+	public function safe($unsafe='') : string {
 		// null arguments to htmlspecialchars() is deprecated
 		if ( ! $unsafe ) {
 			return '';

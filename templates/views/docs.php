@@ -50,7 +50,7 @@
 										hx-get="/docs/quickstart"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>Quickstart</a>
 								</li>
 								<li class="nav-item <?= $App->data['doc'] === 'structure' ? 'active' : ''; ?>">
@@ -59,7 +59,7 @@
 										hx-get="/docs/structure"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>Structure</a>
 								</li>
 								<li class="nav-item <?= $App->data['doc'] === 'deploy' ? 'active' : ''; ?>">
@@ -68,7 +68,7 @@
 										hx-get="/docs/deploy"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>Deploying</a>
 								</li>
 							</ul>
@@ -80,7 +80,7 @@
 										hx-get="/docs/painfree-application-controller"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>ApplicationController</a>
 								</li>
 								<li class="nav-item <?= $App->data['doc'] === 'painfree-base-view' ? 'active' : ''; ?>">
@@ -89,7 +89,7 @@
 										hx-get="/docs/painfree-base-view"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>BaseView</a>
 								</li>
 							</ul>
@@ -101,7 +101,7 @@
 										hx-get="/docs/painfree-safe"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->safe()</span></a>
 								</li>
 								<li class="nav-item <?= $App->data['doc'] === 'painfree-debug' ? 'active' : ''; ?>">
@@ -110,7 +110,7 @@
 										hx-get="/docs/painfree-debug"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->debug()</span></a>
 								</li>
 								<hr>
@@ -120,7 +120,7 @@
 										hx-get="/docs/painfree-logic"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->logic()</span></a>
 								</li>
 								<li class="nav-item <?= $App->data['doc'] === 'painfree-view' ? 'active' : ''; ?>">
@@ -129,7 +129,7 @@
 										hx-get="/docs/painfree-view"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->view()</span></a>
 								</li>
 								<li class="nav-item <?= $App->data['doc'] === 'painfree-autoload' ? 'active' : ''; ?>">
@@ -138,11 +138,11 @@
 										hx-get="/docs/painfree-autoload"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->autoload()</span></a>
 								</li>
 							</ul>
-
+							<!--
 							<h4>htmx Support</h4>
 							<ul class="fs-5" id="htmx_links" hx-on:click="htmx.findAll('li.nav-item.active').forEach(el => htmx.removeClass(el, 'active'));">
 								<li class="nav-item <?= $App->data['doc'] === 'htmx' ? 'active' : ''; ?>">
@@ -151,7 +151,7 @@
 										hx-get="/docs/htmx"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>Overview</a>
 								</li>
 								<li class="nav-item <?= $App->data['doc'] === 'htmx-usage' ? 'active' : ''; ?>">
@@ -160,10 +160,11 @@
 										hx-get="/docs/htmx-usage"
 										hx-target="#doc_content"
 										hx-push-url="true"
-										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active')"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>Usage</a>
 								</li>
 							</ul>
+							-->
 						</div>
 					</div>
 					<div class="col-lg-10 bg-dark pt-2 border-start" id="doc_content">	
