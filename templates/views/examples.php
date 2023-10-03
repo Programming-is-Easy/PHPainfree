@@ -36,11 +36,11 @@
 			</div>
 		</section>
         <!-- Testimonials section-->
-        <section class="bg-secondary bg-opacity-25 border-bottom border-success" id="examples">
+        <section class="bg-secondary bg-opacity-25 border-bottom border-secondary border-top" id="examples">
             <div class="container-fluid">
-                <div class="row justify-content-center border-top">
-					<div class="col-lg-2 bg-dark">
-						<div class="bg-dark sticky-top p-2 overflow-auto pt-4" style="height:90vh; top:4.2em;">
+                <div class="row justify-content-center">
+					<div class="col-lg-2 bg-dark pt-1">
+						<div class="bg-dark sticky-top p-2 overflow-auto pt-4" style="top:4.2em;">
 							<h4>PHPainfree<code>2</code></h4>
 							<ul class="fs-5" id="painfree_navigation_links" hx-on:click="htmx.findAll('li.nav-item.active').forEach(el => htmx.removeClass(el, 'active'));">
 								<li class="nav-item <?= $App->data['example'] === 'default' ? 'active' : ''; ?>">
@@ -55,7 +55,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-lg-10 bg-dark pt-2 border-start" id="example_content">	
+					<div class="col-lg-10 bg-dark pt-2 border-start border-secondary" id="example_content">	
 					<?php
 						if ( file_exists($file_path) ) {
 							include_once "examples/{$App->data['example']}.php";

@@ -25,7 +25,7 @@
 	</div>
 	<div class="col-lg-6">
 		<!-- Step 1 -->
-		<div class="card bg-dark border-warning mb-4">
+		<div class="card bg-dark border-info mb-4">
 			<div class="card-body p-4">
 <pre><code class="language-treeview">PHPainfree/
 |-- htdocs/
@@ -90,7 +90,7 @@ RewriteRule ^(.+)$ index.php?route=$1&%{QUERY_STRING} [L]
 	</div>
 	<div class="col-lg-6">
 		<!-- Step 2 -->
-		<div class="card bg-dark border-warning mb-4">
+		<div class="card bg-dark border-info mb-4">
 			<div class="card-body p-4">
 <pre data-line="1" data-line-offset="-2"><code class="language-treeview">PHPainfree/
 |-- htdocs/
@@ -136,7 +136,7 @@ include 'includes/Painfree.php';
 	</div>
 	<div class="col-lg-6">
 		<!-- Step 2 -->
-		<div class="card bg-dark border-warning mb-4">
+		<div class="card bg-dark border-info mb-4">
 			<div class="card-body p-4">
 <pre data-line="2" data-line-offset="-2"><code class="language-treeview">PHPainfree/
 |-- htdocs/
@@ -221,7 +221,7 @@ class PHPainfree {
 	</div>
 	<div class="col-lg-6">
 		<!-- Step 2 -->
-		<div class="card bg-dark border-warning mb-4">
+		<div class="card bg-dark border-info mb-4">
 			<div class="card-body p-4">
 <pre data-line="3" data-line-offset="-2"><code class="language-treeview">PHPainfree/
 |-- htdocs/
@@ -276,7 +276,7 @@ class PHPainfree {
 		</p>
 	</div>
 	<div class="col-lg-6">
-		<div class="card bg-dark border-warning mb-4">
+		<div class="card bg-dark border-info mb-4">
 			<div class="card-body p-4">
 <pre data-line="4" data-line-offset="0"><code class="language-treeview">PHPainfree/
 |-- htdocs/
@@ -347,7 +347,7 @@ class PHPainfree {
 		</p>
 	</div>
 	<div class="col-lg-6">
-		<div class="card bg-dark border-warning mb-4">
+		<div class="card bg-dark border-info mb-4">
 			<div class="card-body p-4">
 <pre data-line="5" data-line-offset="-1" id="test"><code class="language-treeview">PHPainfree/
 |-- htdocs/
@@ -634,7 +634,7 @@ class PHPainfree {
 		</div>
 	</div>
 	<div class="col-lg-6">
-		<div class="card bg-dark border-warning mb-4">
+		<div class="card bg-dark border-info mb-4">
 			<div class="card-body p-4">
 <pre data-line="7" data-line-offset="2" data-start="2"><code class="language-treeview">PHPainfree/
 |-- htdocs/

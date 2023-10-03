@@ -37,11 +37,11 @@
 			</div>
 		</section>
         <!-- Testimonials section-->
-        <section class="bg-secondary bg-opacity-25 border-bottom border-success" id="documentation">
+        <section class="bg-secondary bg-opacity-25 border-bottom border-secondary border-top" id="documentation">
             <div class="container-fluid">
-                <div class="row justify-content-center border-top">
-					<div class="col-lg-2 bg-dark">
-						<div class="bg-dark sticky-top p-2 overflow-auto pt-4" style="min-height:90vh; top:4.2em;">
+                <div class="row justify-content-center">
+					<div class="col-lg-2 bg-dark pt-1">
+						<div class="bg-dark sticky-top p-2 overflow-auto pt-4" style="min-height:50vh; top:4.2em;">
 							<h4>PHPainfree<code>2</code></h4>
 							<ul class="fs-5" id="painfree_navigation_links" hx-on:click="htmx.findAll('li.nav-item.active').forEach(el => htmx.removeClass(el, 'active'));">
 								<li class="nav-item <?= $App->data['doc'] === 'quickstart' ? 'active' : ''; ?>">
@@ -177,7 +177,7 @@
 							-->
 						</div>
 					</div>
-					<div class="col-lg-10 bg-dark pt-2 border-start" id="doc_content">	
+					<div class="col-lg-10 bg-dark pt-2 border-start border-secondary" id="doc_content">	
 					<?php
 						if ( file_exists($file_path) ) {
 							include_once "docs/{$App->data['doc']}.php";
