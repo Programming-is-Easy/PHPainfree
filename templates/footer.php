@@ -8,7 +8,7 @@
 				</div>
 				<div class="row">
 					<p class="m-0 text-center text-white">
-						Copyright &copy; <a href="https://github.com/Programming-is-Easy/PHPainfree">PHPainfree</a> <?= date('Y'); ?>
+						Copyright &copy;<?= date('Y'); ?> <a href="https://github.com/Programming-is-Easy/PHPainfree">PHPainfree</a>
 					</p>
 				</div>
 			</div>
