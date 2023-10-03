@@ -8,7 +8,10 @@
 								<a class="nav-link p-0 pb-1" href="https://github.com/Programming-is-Easy/PHPainfree/blob/main/LICENSE">BSD-3 License</a>	
 							</li>
 							<li class="nav-item">
-								<a class="nav-link p-0 pb-1" href="">Contribute</a>	
+								<a class="nav-link p-0 pb-1" href="https://github.com/Programming-is-Easy/PHPainfree/blob/main/CONTRIBUTING.md">Contribute</a>	
+							</li>
+							<li class="nav-item">
+								<a class="nav-link p-0 pb-1" href="https://discord.gg/4vsqB87">Join us on Discord</a>	
 							</li>
 							<li class="nav-item">
 								<a class="nav-link p-0 pb-1" href="https://programming-is-easy.com">Programming is Easy</a>	
