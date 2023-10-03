@@ -3,7 +3,7 @@
             <div class="container px-5">
 				<div class="row">
 					<p class="mb-3 text-end">
-						<code class="text-light">Page generated in: <span class="text-info"><?= sprintf('%0.4f', (microtime(true) - $__painfree_start_time)) . 's'; ?></span></code>
+						<code class="text-light">Page generated in: <span class="text-info"><?= sprintf('%0.4f', (microtime(true) - $__painfree_start_time)) . 's'; ?></span> 🔥🔥</code>
 					</p>
 				</div>
 				<div class="row">
