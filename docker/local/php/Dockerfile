@@ -6,6 +6,7 @@ RUN docker-php-ext-enable mysqli
 RUN docker-php-ext-install gd && docker-php-ext-enable gd
 RUN docker-php-ext-install bcmath && docker-php-ext-enable bcmath
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer install
 RUN mkdir -p /var/www/vhosts/phpainfree
 
 COPY httpd-docker-local.conf /etc/apache2/sites-available/000-default.conf

@@ -18,7 +18,7 @@
 							class="command-line"
 							data-prompt="$"
 							data-continuation-str="\"
-						><code class="language-bash">git clone --depth=1 git@github.com:Programming-is-Easy/PHPainfree.git \
+						><code class="language-bash">git clone --depth=1 https://github.com/Programming-is-Easy/PHPainfree.git \
 && cd PHPainfree && rm -rf .git && cp development.env .env</code></pre>
 						<p class="lead">
 							Grab the current source code from Github, delete the <code>.git/</code> folder,
@@ -40,9 +40,9 @@
 					<div class="card-body p-4">
 						<pre
 							class="command-line"
-							data-prompt="$"
+							data-prompt="#"
 							data-continuation-str="\"
-						><code class="language-bash">sudo docker compose up</code></pre>
+						><code class="language-bash">docker compose up</code></pre>
 						<p class="lead">
 							PHPainfree V2 comes with a Docker setup for speedy development. By default, the <code>docker-compose.yml</code>
 							configuration will start up three containers:
