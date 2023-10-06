@@ -1,5 +1,4 @@
 <?php
-
 /************************** PHPainfree **************************
 Name: Painfree.php
 
@@ -38,7 +37,7 @@ include $Painfree->view();  // load the view
 
 class PHPainfree {
 	/* public members */
-	public $Version  = '0.11.0';
+	public $Version  = '2.0.1';
 	public $URI      = null;
 	public $route    = '';
 	public $Root     = '';
