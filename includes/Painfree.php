@@ -45,7 +45,6 @@ class PHPainfree {
 	public $db       = null;
 	public $Autoload = array();
 	public $__debug  = array(); // this is somewhat special.
-	public $paths    = array();
 
 	/* private members */
 	private $options = array();
