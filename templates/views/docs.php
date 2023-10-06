@@ -120,6 +120,26 @@
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->debug()</span></a>
 								</li>
+								<li class="nav-item <?= $App->data['doc'] === 'painfree-load_css' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/painfree-load_css"
+										hx-get="/docs/painfree-load_css"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-swap-oob="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
+									><span class="font-monospace">$Painfree->load_css()</span></a>
+								</li>
+								<li class="nav-item <?= $App->data['doc'] === 'painfree-load_js' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/painfree-load_js"
+										hx-get="/docs/painfree-load_js"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-swap-oob="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
+									><span class="font-monospace">$Painfree->load_js()</span></a>
+								</li>
 								<hr>
 								<li class="nav-item <?= $App->data['doc'] === 'painfree-logic' ? 'active' : ''; ?>">
 									<a class="nav-link d-inline-block"

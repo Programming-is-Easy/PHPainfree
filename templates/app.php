@@ -46,22 +46,15 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
 		<link href="/css/prism.min.css" rel="stylesheet" />
 		<script src="/js/prism.min.js"></script>
 
-<?php
-	// DYNAMICALLY LOADED CSS AND JAVASCRIPT (by $App->view)
-	if ( file_exists("{$App->BASE_PATH}/htdocs/css/views/{$App->view}.css") ) {
-?>
-		<link rel="stylesheet" href="/css/views/<?= $App->view; ?>.css" />
-<?php
-	}
+		<!-- Dynamically load our css/js resources by "view" -->
+		<!-- View-specific CSS -->
+		<?= $Painfree->load_css($App->view); ?> 
+		
+		<!-- View-specific JS -->
+		<?= $Painfree->load_js($App->view); ?> 
 
-	if ( file_exists("{$App->BASE_PATH}/htdocs/js/views/{$App->view}.js") ) {
-?>
-		<script type="text/javascript" src="/js/views/<?= $App->view; ?>.js" defer></script>
-<?php
-	}
-?>
-
-		<link href="/css/painfree_development.css" rel="stylesheet" />
+		<!-- Special PHPainfree demo development CSS -->
+		<?= $Painfree->load_css('painfree_development'); ?> 
 	</head>
 	<body id="app-body" class="bg-dark text-light">
 <?php

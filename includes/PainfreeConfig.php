@@ -31,6 +31,31 @@ $PainfreeConfig = array(
 	// DefaultView is the default view
 	'DefaultRoute' => 'main',
 
+	// Name of the folders where application content is housed:
+	// PublicFolder - Statically served content and the top-level web resource.
+	// TemplateFolder - Templates and views
+	// LogicFolder - Logical PHP scripts and Classes
+	'PublicFolder'   => 'htdocs',
+	'TemplateFolder' => 'templates',
+	'LogicFolder'    => 'includes',
+
+	// Name of the folder where your Controllers are defined dynamically
+	// by "view" - `/includes/Controllers/{$view}.php`
+	'ControllerFolder' => 'Controllers',
+	
+	// Publicly accessible Routes/Paths
+	// The value is the name of the folder under `htdocs/`
+	'ImagesFolder' => 'images', // `htdocs/images/`
+	'CssFolder'    => 'css',    // `htdocs/css/`
+	'JsFolder'     => 'js',     // `htdocs/js/`
+
+	// Name of folder where dynamically loaded "views" are kept
+	// for all static resources and templates
+	//
+	// /htdocs/js/views/{$view}.js, htdocs/css/views/{$view}.css
+	// /templates/views/{$view}.php
+	'DynamicFolder' => 'views', 
+
 	// DB Configuration
 	// each element in the array is a DB server to try. If one
 	// fails to connect, it will roll-over to the next
@@ -79,6 +104,4 @@ $PainfreeConfig = array(
 
 	// hardcore configuration. only change this if you know what you're doing
 	'RouteParameter' => 'route',
-	'TemplateFolder' => 'templates',
-	'LogicFolder'    => 'includes',
 );
