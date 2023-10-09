@@ -49,11 +49,43 @@ class PHPainfree {
 	/* private members */
 	private $options = array();
 
-	public function logic() {
-		return $this->options['LogicFolder'] . '/' . $this->options['ApplicationController'];
-	}
-	public function view() {
-		return $this->options['TemplateFolder'] . '/' . $this->options['BaseView'];
+	/**
+	 * Public Helper Functions
+	 * - load_view($view, $missing='404') - Returns path to view template.
+	 * - load_js($view, $defer=true) - Return a rendered <script> tag.
+	 * - load_css($view) - Return a rendered <link> tag.
+	 * - safe($string) - Returns a sanitized string safe for template output.
+	 * - debug($heading, $obj) - Stores an object dump for later inspection.
+	 */
+
+	/**
+	 * load_view() accepts a "view" as it's main argument and will return
+	 * a path to a view template if it exists. If it does not exist, will 
+	 * return a path to a "404" template that can be used to tell your user
+	 * that the page they have requested was not found.
+	 *
+	 * This function will _always_ return a path to a file that you can 
+	 * pass directly to `include`, `include_once`, `require`, or `require_once`.
+	 *
+	 * @requires `includes/Core/EmptyInclude.php`
+	 *
+	 * @param string $view The name of the template file to search for.
+	 * @param string $missing The name of a template to use as a fallback.
+	 *
+	 * @returns string $path_to_file (defaults to EmptyInclude path)
+	 */
+	public function load_view($view, $missing='404') : string {
+		$template_path = "{$this->Root}/{$this->options['TemplateFolder']}";
+		$dynamic_path = "{$template_path}/{$this->options['DynamicFolder']}";
+
+		if ( file_exists("{$template_path}/{$view}.php") ) {
+			return "{$template_path}/{$view}.php";
+		}
+		if ( file_exists("{$dynamic_path}/{$view}.php") ) {
+			return "{$dynamic_path}/{$view}.php";
+		}
+
+		return "{$this->Root}/{$this->options['LogicFolder']}/core/EmptyInclude.php";
 	}
 
 	/**
@@ -155,6 +187,14 @@ class PHPainfree {
 		$this->__debug[$heading] = print_r($obj,true);
 	}
 
+	/**
+	 * Internal Functions
+	 * - autoload() - loads all scripts inside `includes/Autoload`
+	 * - logic() - loads the script defined as `ApplicationController`
+	 * - view() - loads the script defined as `BaseView`
+	 *
+	 * ------- CHANGE OR MODIFY WITH CAUTION --------
+	 */
 	public function autoload() {
 		// process Autoload folder
 		$auto_load_path = $this->Root . $this->options['LogicFolder'] . '/Autoload/*.php';
@@ -167,6 +207,14 @@ class PHPainfree {
 		}
 
 		return $this->Autoload;
+	}
+	
+	public function logic() {
+		return $this->options['LogicFolder'] . '/' . $this->options['ApplicationController'];
+	}
+
+	public function view() {
+		return $this->options['TemplateFolder'] . '/' . $this->options['BaseView'];
 	}
 
 	public function __construct($options) {

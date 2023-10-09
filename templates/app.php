@@ -57,20 +57,11 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
 		<?= $Painfree->load_css('painfree_development'); ?> 
 	</head>
 	<body id="app-body" class="bg-dark text-light">
-<?php
-		include 'header.php';	
-?>
 
 <?php
-	if ( file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.php") ) {
-		include "views/{$App->view}.php";
-	} else {
-		include "views/404.php";
-	}
-?>
-
-<?php
-		include 'footer.php';	
+		include $Painfree->load_view('header');
+		include $Painfree->load_view($App->view, '404');
+		include $Painfree->load_view('footer');
 ?>
 
 <?php
@@ -78,7 +69,7 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
 	// you will want to do a permissions check here to only show it to people with
 	// "developer" permissions in your product.
 	if ( isset($_ENV['ENVIRONMENT']) && $_ENV['ENVIRONMENT'] === 'development' ) {
-		include 'debug.php';
+		include $Painfree->load_view('debug');
 	}
 ?>
 	</body>
