@@ -120,6 +120,16 @@
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									><span class="font-monospace">$Painfree->debug()</span></a>
 								</li>
+								<li class="nav-item <?= $App->data['doc'] === 'painfree-load_view' ? 'active' : ''; ?>">
+									<a class="nav-link d-inline-block"
+										href="/docs/painfree-load_view"
+										hx-get="/docs/painfree-load_view"
+										hx-target="#doc_content"
+										hx-push-url="true"
+										hx-swap-oob="true"
+										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
+									><span class="font-monospace">$Painfree->load_view()</span></a>
+								</li>
 								<li class="nav-item <?= $App->data['doc'] === 'painfree-load_css' ? 'active' : ''; ?>">
 									<a class="nav-link d-inline-block"
 										href="/docs/painfree-load_css"
