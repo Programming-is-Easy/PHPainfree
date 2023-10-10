@@ -25,13 +25,11 @@ Caveat Emptor
 
 About
 -----
-
-+ **Version:** 2.0.0
-+ **Author:** Eric Ryan Harrison ([email](mailto:phpainfree@ericharrison.info) || [blog](http://ericharrison.info))
++ **Version:** 2.1.0
++ **Maintainer:** Eric Harrison (@blister)
 
 Installation
 ------------
-
 	1. Extract the PHPainfree release.
 	2. Place the contents of the htdocs/ folder in your web directory's document root.
 	3. Place the includes/ and templates/ folders somewhere accessible to your PHP's include root.
@@ -52,3 +50,9 @@ Notes
 -----
 
 - v2 is a work in progress. All ideas and suggestions are welcome!
+
+Contributors
+------------
+- Eric Ryan Harrison (@blister)  
+- Kari Turner (@thespecialK)
+- Ryan Laurie (@iethree)
