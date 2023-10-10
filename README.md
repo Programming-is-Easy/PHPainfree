@@ -26,7 +26,7 @@ Caveat Emptor
 About
 -----
 + **Version:** 2.1.0
-+ **Maintainer:** Eric Harrison (@blister)
++ **Maintainer:** Eric Harrison [@blister](https://github.com/blister)
 
 Development Quickstart
 ----------------------
@@ -52,6 +52,6 @@ Notes
 
 Contributors
 ------------
-- Eric Ryan Harrison (@blister)  
-- Kari Turner (@thespecialK)
-- Ryan Laurie (@iethree)
+- Eric Ryan Harrison [@blister](https://github.com/blister)
+- Kari Turner [@thespecialK](https://github.com/thespecialK)
+- Ryan Laurie [@iethree](https://github.com/iethree)
