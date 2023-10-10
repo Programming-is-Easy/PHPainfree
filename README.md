@@ -28,27 +28,26 @@ About
 + **Version:** 2.1.0
 + **Maintainer:** Eric Harrison (@blister)
 
+Development Quickstart
+----------------------
+PHPainfree2 comes with a predefined Docker image to make local development easier.
+To start, simply run the following command inside your folder:
+```console
+docker compose up
+```
+
 Installation
 ------------
 	1. Extract the PHPainfree release.
 	2. Place the contents of the htdocs/ folder in your web directory's document root.
 	3. Place the includes/ and templates/ folders somewhere accessible to your PHP's include root.
 		(If you can't mess with your include root, you should be able to place these folders inside your document root)
-	4. Copy includes/PainfreeConfig-GENERIC.php to PainfreeConfig.php.
-	5. Edit includes/PainfreeConfig.php. Modify the $PainfreeConfig variable to match your application configuration.
-	6. Run and enjoy!
+	4. Edit includes/PainfreeConfig.php. Modify the $PainfreeConfig variable to match your application configuration.
+	5. Run and enjoy!
 
-Development Installation
-------------------------
-V2 comes with a predefined Docker image to make local development much easier.
-To run, simply run the following command inside your folder:
-```console
-docker compose up
-```
 
 Notes
 -----
-
 - v2 is a work in progress. All ideas and suggestions are welcome!
 
 Contributors
