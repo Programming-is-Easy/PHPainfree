@@ -11,7 +11,7 @@
 				<!-- Step 1 -->
 				<div class="card bg-dark border-warning mb-4">
 					<div class="card-header bg-primary bg-opacity-10">
-						<h4 class="my-2">1. Grab the Source Code</h4>
+						<h3 class="my-2">1. Grab the Source Code</h3>
 					</div>
 					<div class="card-body p-4">
 						<pre
@@ -35,7 +35,7 @@
 				<!-- Step 2 -->
 				<div class="card bg-dark border-warning mb-4">
 					<div class="card-header bg-primary bg-opacity-10">
-						<h4 class="my-2">2. Turn on the Docker Server</h4>
+						<h3 class="my-2">2. Turn on the Docker Server</h3>
 					</div>
 					<div class="card-body p-4">
 						<pre
@@ -57,7 +57,7 @@
 				<!-- Step 3 -->
 				<div class="card bg-dark border-warning mb-4">
 					<div class="card-header bg-primary bg-opacity-10">
-						<h4 class="my-2">3. Code!</h4>
+						<h3 class="my-2">3. Code!</h3>
 					</div>
 					<div class="card-body p-4">
 						<p class="lead">

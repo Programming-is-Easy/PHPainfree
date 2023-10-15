@@ -7,7 +7,7 @@
 		<!-- Step 1 -->
 		<div class="card bg-dark border-warning mb-4">
 			<div class="card-header bg-primary bg-opacity-10">
-				<h4 class="my-2">1. Grab the Source Code</h4>
+				<h2 class="my-2">1. Grab the Source Code</h2>
 			</div>
 			<div class="card-body p-4">
 				<pre

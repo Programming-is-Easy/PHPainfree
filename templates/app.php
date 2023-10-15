@@ -28,6 +28,9 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
 	<head>
 		<title><?= $Painfree->safe($App->title()); ?></title>
 
+		<meta name="viewport" contents="width=device-width, initial-scale=1">
+		<meta name="description" content="PHPainfree2 is a fast and efficient PHP framework designed to make modern web development simple and painless.">
+
 		<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 
 		<!-- bootstrap used in example page. Not required by PHPainfree -->
@@ -37,14 +40,14 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
 	
 		<!-- htmx -->
-		<script src="https://unpkg.com/htmx.org@1.9.5"></script>
+		<script src="https://unpkg.com/htmx.org@1.9.5" async defer></script>
 
 		<!-- github buttons -->
 		<script async defer src="https://buttons.github.io/buttons.js"></script>
 
 		<!-- Prism (syntax highlighting in <code> blocks) -->
 		<link href="/css/prism.min.css" rel="stylesheet" />
-		<script src="/js/prism.min.js"></script>
+		<script src="/js/prism.min.js" async defer></script>
 
 		<!-- Dynamically load our css/js resources by "view" -->
 		<!-- View-specific CSS -->
