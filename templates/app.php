@@ -28,7 +28,7 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
 	<head>
 		<title><?= $Painfree->safe($App->title()); ?></title>
 
-		<meta name="viewport" contents="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="PHPainfree2 is a fast and efficient PHP framework designed to make modern web development simple and painless.">
 
 		<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
