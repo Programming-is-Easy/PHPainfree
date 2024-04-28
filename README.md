@@ -25,7 +25,7 @@ Caveat Emptor
 
 About
 -----
-+ **Version:** 2.1.0
++ **Version:** 2.1.1
 + **Maintainer:** Eric Harrison [@blister](https://github.com/blister)
 
 Development Quickstart

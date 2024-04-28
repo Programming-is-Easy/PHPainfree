@@ -1,4 +1,6 @@
 <?php
+global $App, $Painfree;
+
 if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.php") ) {
 	// If we are an htmx request and the "view" variable exists in the top-level
 	// templates folder, render that as an HTMX snippet.
