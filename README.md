@@ -25,7 +25,7 @@ Caveat Emptor
 
 About
 -----
-+ **Version:** 2.1.1
++ **Version:** 2.2.0
 + **Maintainer:** Eric Harrison [@blister](https://github.com/blister)
 
 Development Quickstart
@@ -49,6 +49,10 @@ Installation
 Notes
 -----
 - v2 is a work in progress. All ideas and suggestions are welcome!
+
+Version 2.2 
+-----------
+- 6/19/2024 - Updated default view template to use [htmx version 2.0.0](https://htmx.org/posts/2024-06-17-htmx-2-0-0-is-released/) by default.
 
 Contributors
 ------------

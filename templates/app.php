@@ -39,7 +39,7 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
 	
 		<!-- htmx -->
-		<script src="https://unpkg.com/htmx.org@1.9.5"></script>
+		<script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.min.js"></script>
 
 		<!-- github buttons -->
 		<script async defer src="https://buttons.github.io/buttons.js"></script>
