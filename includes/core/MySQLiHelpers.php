@@ -26,6 +26,66 @@ class MySQLiHelpers {
 	) {
 		$query = trim($query);
 		try {
+			$data = null;
+			if (!$this->db) {
+				throw new \Exception('no database connection established');
+			}
+
+			if (($types || $params) && strlen($types) !== count($params)) {
+				throw new \Exception('db query error: type/param mismatch');
+			}
+			$stmt = $this->db->prepare($query);
+
+			if (!$stmt) {
+				throw new \Exception($this->db->error);
+			}
+			
+			if (!empty($types) && !empty($params)) {
+				$stmt->bind_param($types, ...$params);
+			}
+		
+			$stmt->execute();
+
+			if (preg_match('/^INSERT/i', $query)) {
+				$data = $stmt->insert_id;
+			} else if (preg_match('/^SELECT/i', $query)) {
+				$result = $stmt->get_result();
+
+				$data = null;
+
+				if ($single) {
+					$data = $result->fetch_array(MYSQLI_ASSOC);
+				} else if (!empty($assoc_key)) {
+					while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+						if (!array_key_exists($assoc_key, $row)) {
+							throw new \Exception('db query error: invalid assoc_key, key name must exist in the result set');
+						}
+
+						$data[$row[$assoc_key]] = $row;
+					}
+				} else {
+					$data = $result->fetch_all(MYSQLI_ASSOC);
+				}
+			} else if (preg_match('/^UPDATE/i', $query)) {
+				preg_match_all ('/(\S[^:]+): (\d+)/', $this->db->info, $matches);
+				// Covert info string into associative array
+				$result = array_combine (str_replace(' ', '_', $matches[1]), $matches[2]);
+				$data = !empty($result) ? $result['Rows_matched'] : 0;
+			} else {
+				$data = $stmt->affected_rows;
+			}
+
+			$stmt->close();
+			return $data;
+		} catch (\Exception $e) {
+			error_log($e->getMessage() . $query);
+		}
+		return null;
+
+
+
+		$query = trim($query);
+		try {
 			if (!$this->db) {
 				throw new \Exception('no database connection established');
 			}
@@ -49,6 +109,26 @@ class MySQLiHelpers {
 			if (preg_match('/^INSERT/i', $query)) {
 				$data = $stmt->insert_id;
 			} else if (preg_match('/^SELECT/i', $query)) {
+				$result = $stmt->get_result();
+
+				$data = null;
+
+				if ($single) {
+					$data = $result->fetch_array(MYSQLI_ASSOC);
+				} else if (!empty($assoc_key)) {
+					while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+						if (!array_key_exists($assoc_key, $row)) {
+							throw new \Exception('db query error: invalid assoc_key, key name must exist in the result set');
+						}
+
+						$data[$row[$assoc_key]] = $row;
+					}
+				} else {
+					$data = $result->fetch_all(MYSQLI_ASSOC);
+				}
+			} else if (preg_match('/^UPDATE/i', $query)) {
+				
+
 				$data = $single
 					? $stmt->get_result()->fetch_array(MYSQLI_ASSOC)
 					: $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
