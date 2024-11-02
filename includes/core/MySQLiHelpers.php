@@ -73,7 +73,7 @@ class MySQLiHelpers {
 	 * @return array|null an associative array or null on any error
 	 */
 	public function queryOne(string $query, string $types = null, array $params = null) {
-		return $this->query($query, $types, $params, true);
+		return $this->query($query, $types, $params, null, true);
 	}
 
 	/**
