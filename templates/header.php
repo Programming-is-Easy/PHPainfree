@@ -26,7 +26,10 @@
 							<a class="nav-link <?= $App->view === 'examples' ? 'active' : ''; ?>" href="/examples">Examples</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="https://github.com/Programming-is-Easy/PHPainfree">Download v.<?= $Painfree->Version; ?></a>
+							<a
+								class="nav-link"
+								href="https://github.com/Programming-is-Easy/PHPainfree/releases"
+							>Download v.<?= $Painfree->Version; ?></a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="https://github.com/Programming-is-Easy/PHPainfree/issues">Issue Tracker</a>
