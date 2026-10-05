@@ -107,3 +107,4 @@ $PainfreeConfig = array(
 	// hardcore configuration. only change this if you know what you're doing
 	'RouteParameter' => 'route',
 );
+

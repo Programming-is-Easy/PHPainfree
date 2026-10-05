@@ -20,7 +20,19 @@ Usage:
 ****************************************************************/
 $__painfree_start_time = microtime(true);
 
-require 'PainfreeConfig.php'; // you must have this file
+/**
+ * Returns the $PainfreeConfig array.
+ *
+ * @return array $PainfreeConfig 
+ */
+function get_PainfreeConfig() : array {
+	/** @var array $PainfreeConfig */
+	require 'PainfreeConfig.php'; // you must have this file
+
+	return $PainfreeConfig;
+}
+
+$PainfreeConfig = get_PainfreeConfig();
 
 $Painfree = new PHPainfree($PainfreeConfig);
 $Painfree->URI = $_SERVER['SERVER_PORT'] == 80 ? 'http://' : 'https://';
@@ -38,12 +50,16 @@ include $Painfree->view();  // load the view
 class PHPainfree {
 	/* public members */
 	// make sure we don't error if anything is relying on a version number
-	public $Version  = '2.2.1';
-	public $URI      = null;
-	public $route    = '';
-	public $Root     = '';
-	public $db       = null;
-	public $Autoload = array();
+	public string $Version = '2.3.0';
+	public ?string $URI    = null;
+	public ?string $route  = '';
+	public ?string $Root   = '';
+	public array $Autoload = array();
+
+	// Database interfaces and handles
+	public DBI $DBI;
+	public mixed $db = null;
+
 	public $__debug  = array(); // this is somewhat special.
 
 	/* private members */
@@ -70,7 +86,7 @@ class PHPainfree {
 	 * @requires `includes/Core/EmptyInclude.php`
 	 *
 	 * @param string $view The name of the template file to search for.
-	 * @param string $missing The name of a template to use as a fallback.
+	 * @param string $missing='404' The name of a template to use as a fallback.
 	 *
 	 * @returns string $path_to_file (defaults to EmptyInclude path)
 	 */
@@ -101,11 +117,11 @@ class PHPainfree {
 	 * Do **NOT** pass an extension to this function.
 	 *
 	 * @param string $view The name of the JS file to search for in the public path.
-	 * @param bool $defer Boolean to specify if the defer tag should be included.
+	 * @param bool $defer=true Boolean to specify if the defer tag should be included.
 	 *
 	 * @returns string $html_script_tag Either an empty string or an HTML script tag.
 	 */
-	public function load_js(string $view, $defer = true) : string {
+	public function load_js(string $view, $defer=true) : string {
 		$content_path = "{$this->Root}/{$this->options['PublicFolder']}";
 		$public_path  = "{$this->options['JsFolder']}";
 		$dynamic_path = "{$public_path}/{$this->options['DynamicFolder']}";
@@ -170,13 +186,18 @@ class PHPainfree {
 		return "<link href=\"/{$public_url}\" rel=\"stylesheet\" />";
 	}
 
-	/* string $Painfree->safe($unsafe_string)
-		While $Painfree->safe() doesn't provide any form of guaranteed output
-		security, it will at least be a convenient way to make output "safe-ish"
-		for display. This method will probably need to evolve over time to
-		provide more robust output sanitization.
-	*/
-	public function safe($unsafe='') : string {
+	/**
+	 * This function is a wrapper around htmlspecialchars() and 
+	 * is intended to be used at a minimum for any user-generated 
+	 * content that is rendered into any view template. 
+	 *
+	 * The developer **SHOULD** consider using a more robust output 
+	 * safety filter.
+	 *
+	 * @param string $unsafe=''
+	 * @return string $sanitized_string 
+	 */
+	public function safe(string $unsafe='') : string {
 		// null arguments to htmlspecialchars() is deprecated
 		if ( ! $unsafe ) {
 			return '';
@@ -184,22 +205,43 @@ class PHPainfree {
 		return htmlspecialchars($unsafe);
 	}
 
-	public function debug($heading,$obj,$abort=false) {
+	/**
+	 * This method accepts a heading and any kind of variable 
+	 * and either immediately calls die() to abort execution with 
+	 * a nicely printed version of that variable or adds a formatted 
+	 * version of that object to $Painfree->__debug to be viewed 
+	 * inside templates/debug.php (or another view template that uses 
+	 * the debugging information).
+	 *
+	 * @param string $heading 
+	 * @param mixed $debug_var
+	 * @param bool $abort=false - If true, will immediately call die() 
+	 * @return void
+	 */
+	public function debug(string $heading, mixed $debug_var, bool $abort=false) : void {
 		if ( $abort ) {
-			die('<pre>' . $heading . ' = ' . print_r($obj,true) . '</pre>');
+			die('<pre>' . $heading . ' = ' . print_r($debug_var,true) . '</pre>');
 		}
-		$this->__debug[$heading] = print_r($obj,true);
+		$this->__debug[$heading] = print_r($debug_var,true);
 	}
 
+	
+//  Internal Functions
+//  - autoload() - loads all scripts inside `includes/Autoload`
+//  - logic() - loads the script defined as `ApplicationController`
+//  - view() - loads the script defined as `BaseView`
+//
+// ------- CHANGE OR MODIFY WITH CAUTION --------
+//
 	/**
-	 * Internal Functions
-	 * - autoload() - loads all scripts inside `includes/Autoload`
-	 * - logic() - loads the script defined as `ApplicationController`
-	 * - view() - loads the script defined as `BaseView`
+	 * [INTERNAL] This method is intended for internal-use only. It looks inside 
+	 * $PainfreeConfig['options']['LogicFolder']/Autoload for any 
+	 * file with a .php extension and automatically loads those files 
+	 * into the application.
 	 *
-	 * ------- CHANGE OR MODIFY WITH CAUTION --------
+	 * @return array $this->Autoload - List of all files loaded automatically.
 	 */
-	public function autoload() {
+	public function autoload() : array {
 		// process Autoload folder
 		$auto_load_path = $this->Root . $this->options['LogicFolder'] . '/Autoload/*.php';
 		$loaders = glob($auto_load_path);
@@ -213,11 +255,27 @@ class PHPainfree {
 		return $this->Autoload;
 	}
 	
-	public function logic() {
+	/**
+	 * [INTERNAL] This method is intended for internal-use only. 
+	 *
+	 * It generates and returns the full path to the Logic Folder and 
+	 * Application Controller defined in $PainfreeConfig.
+	 * 
+	 * @return string "/full/path/to/ApplicationController.php"
+	 */
+	public function logic() : string {
 		return $this->options['LogicFolder'] . '/' . $this->options['ApplicationController'];
 	}
 
-	public function view() {
+	/**
+	 * [INTERNAL] This method is intended for internal-use only. 
+	 *
+	 * It generates and returns the full path to the Template Folder and 
+	 * BaseView template defined in $PainfreeConfig.
+	 * 
+	 * @return string "/full/path/to/BaseView.php"
+	 */
+	public function view() : string {
 		return $this->options['TemplateFolder'] . '/' . $this->options['BaseView'];
 	}
 
