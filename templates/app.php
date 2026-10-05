@@ -1,7 +1,29 @@
 <?php
 global $App, $Painfree;
 
-if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templates/views/{$App->view}.php") ) {
+$found_template           = false;
+$found_subtemplate        = false;
+$app_template             = false;
+$app_view_template        = "{$App->BASE_PATH}/apps/{$App->view}/views/{$App->view}.php";
+$app_subview_template     = "{$App->BASE_PATH}/apps/{$App->view}/views/{$App->view}/{$App->id}.php";
+$default_view_template    = "{$App->BASE_PATH}/templates/views/{$App->view}.php";
+$default_subview_template = "{$App->BASE_PATH}/templates/views/{$App->view}/{$App->id}.php";
+
+if ( file_exists($app_view_template) ) {
+	$app_template   = true;
+	$found_template = $app_view_template;
+} else if ( file_exists($default_view_template) ) {
+	$found_template = $default_view_template;
+}
+
+if ( file_exists($app_subview_template) ) {
+	$app_template      = true;
+	$found_subtemplate = $app_subview_template;
+} else if ( file_exists($default_subview_template) ) {
+	$found_subtemplate = $default_subview_template;
+}
+
+if ( $App->htmx && ! $App->htmx_boosted && ($found_template || $found_subtemplate) ) {
 	// If we are an htmx request and the "view" variable exists in the top-level
 	// templates folder, render that as an HTMX snippet.
 	//
@@ -18,12 +40,23 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
 	//
 	// Each application built with PHPainfree should design their routing and
 	// template relationships however best suits that product.
-	if ( file_exists("{$App->BASE_PATH}/templates/views/{$App->view}/{$App->id}.php") ) {
-		include_once "views/{$App->view}/{$App->id}.php";
+	if ( $found_subtemplate ) {
+		include_once $found_subtemplate;
 	} else {
-		include_once "views/{$App->view}.php";
+		include_once $found_template;
 	}
 } else { 
+
+	$view = $App->view;
+	if ( $app_template ) {
+		$view = "{$App->view}/views/{$App->view}";
+		if ( $found_subtemplate ) {
+			$view .= "/{$App->id}";
+		} else {
+			$view = "{$App->view}/views/{$App->view}";
+		}
+	}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +81,9 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
 		<link href="/css/prism.min.css" rel="stylesheet" />
 		<script src="/js/prism.min.js"></script>
 
+		<!-- Load our main application JS -->
+		<script src="/js/phpainfree.js"></script>
+
 		<!-- Dynamically load our css/js resources by "view" -->
 		<!-- View-specific CSS -->
 		<?= $Painfree->load_css($App->view); ?> 
@@ -62,7 +98,7 @@ if ( $App->htmx && ! $App->htmx_boosted && file_exists("{$App->BASE_PATH}/templa
 
 <?php
 		include $Painfree->load_view('header');
-		include $Painfree->load_view($App->view, '404');
+		include $Painfree->load_view($view, '404');
 		include $Painfree->load_view('footer');
 ?>
 

@@ -62,7 +62,9 @@
 					<div class="card-body p-4">
 						<p class="lead">
 							It's really as easy as that! You should have a webserver running the source
-							code in this folder located at <a href="http://localhost:8888">http://localhost:8888/</a>
+							code in this folder located at <a
+								href="http://localhost:<?= $_ENV['DEVELOPMENT_PORT']; ?>"
+							>http://localhost:<?= $_ENV['DEVELOPMENT_PORT']; ?>/</a>
 							and you should see a complete clone of this website.
 						</p>
 						<p>

@@ -1,47 +1,60 @@
-version: '3.9'
-
 # persistent database storage for mysql instance
 volumes:
   phpainfree-datavolume:
 
 services:
+  # RECOMMENDED MODIFICATION - Select an appropriate container name
   phpainfree_dev:
     build: ./docker/local/php
+    # RECOMMENDED MODIFICATION - Select an appropriate image name
     image: phpainfree
+    # RECOMMENDED MODIFICATION - Select an appropriate container name
     container_name: phpainfree
     deploy:
       resources: 
         limits:
           memory: 200M
+    # Bind mount volume using path on the host, relative to the Compose file - HOST:CONTAINER
+    # Can also specify an absolute path mapping, e.g. - /path/to/phpainfree:/var/www/vhosts/phpainfree
+    # Any changes made to the code are immediately reflected inside the running docker container
     volumes:
       - .:/var/www/vhosts/phpainfree
+  # RECOMMENDED MODIFICATION - Select an appropriate open port for http://localhost:$PORT access
     ports:
-      - '8888:80'
+      - 8765:80
     environment:
       COMPOSER_CACHE_DIR: './.composer_cache'
     env_file:
       - .env
   
+  # RECOMMENDED MODIFICATION - Select an appropriate name for this container
   phpainfree_db:
     build:
       context: .
       dockerfile: ./docker/local/mysql/Dockerfile
+    # RECOMMENDED MODIFICATION - Select an appropriate name for this container
     container_name: phpainfree-mysql
     deploy:
       resources: 
         limits:
           memory: 400M
     image: phpainfree-mysql
+    # RECOMMENDED MODIFICATION - Make sure this matches your PainfreeConfig.php ports
+    # expose port 3306 on the database host and expose it to the network as 6033
     ports:
-      - '8889:3306'
+      - 6033:3306
     volumes: 
+      # NOTE: This must match the label of the defined data volume at the top of 
+      # this file.
       - phpainfree-datavolume:/var/lib/mysql
     environment:
+      # RECOMMENDED MODIFICATION
       MYSQL_DATABASE: painfree
       MYSQL_ROOT_PASSWORD: painfreeRoot
       MYSQL_USER: painfree
       MYSQL_PASSWORD: painfree
 
+  # RECOMMENDED MODIFICATION - Select an appropriate name for your project phpmyadmin container
   phpainfree_phpmyadmin:
     deploy:
       resources:
@@ -50,14 +63,22 @@ services:
     build:
       context: .
       dockerfile: ./docker/local/phpmyadmin/Dockerfile
+    # RECOMMENDED MODIFICATION - Select an appropriate name for your project phpmyadmin container
     container_name: phpainfree-phpmyadmin
+    # NOTE: This must match the name of your database container name above
     depends_on:
-      - 'phpainfree_db'
+      - phpainfree_db
+    # NOTE: This must match the name of your database container name above
     links:
-      - 'phpainfree_db:db'
+      - phpainfree_db:db
+    # RECOMMENDED MODIFICATION - Make sure you select an open port on your development 
+    # machine. This port will be how you access PHPMyAdmin's web interface
+    # http://localhost:8000
     ports: 
-      - 8000:80
+      - 5678:80
     environment:
+      # RECOMMENDED MODIFICATION
+      # NOTE - Must be the credentials defined above in your database image
       MYSQL_ROOT_PASSWORD: painfreeRoot
       MYSQL_USER: painfree
       MYSQL_PASSWORD: painfree

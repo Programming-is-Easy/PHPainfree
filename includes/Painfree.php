@@ -75,9 +75,13 @@ class PHPainfree {
 	 * @returns string $path_to_file (defaults to EmptyInclude path)
 	 */
 	public function load_view($view, $missing='404') : string {
-		$template_path = "{$this->Root}/{$this->options['TemplateFolder']}";
-		$dynamic_path = "{$template_path}/{$this->options['DynamicFolder']}";
+		$app_path      = "{$this->Root}{$this->options['AppFolder']}";
+		$template_path = "{$this->Root}{$this->options['TemplateFolder']}";
+		$dynamic_path  = "{$template_path}/{$this->options['DynamicFolder']}";
 
+		if ( file_exists("{$app_path}/{$view}.php") ) {
+			return "{$app_path}/{$view}.php";
+		}
 		if ( file_exists("{$template_path}/{$view}.php") ) {
 			return "{$template_path}/{$view}.php";
 		}

@@ -32,10 +32,12 @@ $PainfreeConfig = array(
 	'DefaultRoute' => 'main',
 
 	// Name of the folders where application content is housed:
-	// PublicFolder - Statically served content and the top-level web resource.
+	// PublicFolder   - Statically served content and the top-level web resource.
+	// AppFolder      - App-based routing templates and controllers
 	// TemplateFolder - Templates and views
-	// LogicFolder - Logical PHP scripts and Classes
+	// LogicFolder    - Logical PHP scripts and Classes
 	'PublicFolder'   => 'htdocs',
+	'AppFolder'      => 'apps',
 	'TemplateFolder' => 'templates',
 	'LogicFolder'    => 'includes',
 

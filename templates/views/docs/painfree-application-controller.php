@@ -24,7 +24,7 @@
 	<div class="col-lg-6">
 		<div class="card bg-dark border-warning mb-4">
 			<div class="card-header fs-4 font-monospace">ApplicationController</div>
-			<div class="card-body p-4">
+			<div class="card-body px-2 py-1">
 				<table class="table table-striped table-dark">
 					<thead>
 						<tr>
@@ -46,12 +46,14 @@
 						</tr>
 					</tbody>
 				</table>
-<pre data-line="1,2,3" data-line-offset="-3" id="test"><code class="language-treeview">PHPainfree/
+<pre data-line="1,2,3,4,5" data-line-offset="-3" id="test"><code class="language-treeview">PHPainfree/
 |-- htdocs/
 |-- includes/
 |   |-- PainfreeConfig.php
 |   |-- Painfree.php
 |   |-- App.php
+|   `-- App/
+|     `-- App.class.php
 |   `-- Controllers/
 `-- templates/
 </code></pre>
@@ -79,7 +81,7 @@
 		<p>
 			At the top of the ApplicationController, the code creates a global
 			Singleton instance of <code class="language-php">class App</code> defined
-			in this file.
+			in the <code>includes/App/App.class.php</code> file.
 		</p>
 		<div class="ms-4 card bg-primary bg-opacity-10 border-info">
 			<div class="card-body">
@@ -111,18 +113,19 @@
 	<div class="col-lg-6">
 		<div class="card bg-dark border-warning mb-4">
 			<div class="card-header">includes/App.php</div>
-			<div class="card-body p-4">
+			<div class="card-body px-2 py-1">
 				<pre class="line-numbers"><code class="language-php">
 &lt;?php
 	// It's common to rename the "App" class and object instance to match
 	// your specific product. Feel free to leave it as $App or rename it.
+	require_once 'App/App.class.php';
 	$App = new App();
 				</code></pre>
 			</div>
 		</div>
 		<div class="card bg-dark border-warning mb-4">
-			<div class="card-header">includes/App.php</div>
-			<div class="card-body p-4">
+			<div class="card-header">includes/App/App.class.php</div>
+			<div class="card-body px-2 py-1">
 				<pre class="line-numbers" data-start="91" data-line="94-106" data-line-offset="91"><code class="language-php">
 		class App {
 		// snipped...
@@ -172,8 +175,8 @@
 	<div class="col-lg-6">
 		<div class="card bg-dark border-warning mb-4">
 			<div class="card-header">includes/App.php</div>
-			<div class="card-body p-4">
-				<pre class="line-numbers" data-start="4" data-line="5-6" data-line-offset="4"><code class="language-php">
+			<div class="card-body px-2 py-1">
+				<pre class="line-numbers" data-start="4" data-line="6-7" data-line-offset="4"><code class="language-php">
 	$App = new App();
 	// any internal classes should be defined below
 	// require_once 'includes/App/User.php'; 
@@ -209,16 +212,10 @@
 	<div class="col-lg-6">
 		<div class="card bg-dark border-warning mb-4">
 			<div class="card-header">includes/App.php</div>
-			<div class="card-body p-4">
+			<div class="card-body px-2 py-1">
 				<pre class="line-numbers" data-line="10" data-start="9" data-line-offset="10"><code class="language-php">
 	// start routing and handle the request
 	$App->route();
-
-	/**
-	 * App Singleton
-	 */
-	class App {
-		// ... 
 				</code></pre>
 			</div>
 		</div>
@@ -242,7 +239,7 @@
 		</p>
 		<div class="card bg-dark border-warning mb-4">
 			<div class="card-header">includes/App.php, <code class="language-php">App::setRoutes()</code></div>
-			<div class="card-body p-4">
+			<div class="card-body px-2 py-1">
 				<pre class="line-numbers" data-start="81"><code class="language-php">
 		private function __setRoutes() : void {
 			$routes = explode('/', $this->route);
@@ -269,7 +266,7 @@
 	<div class="col-lg-6">
 		<div class="card bg-dark border-warning mb-4">
 			<div class="card-header">includes/App.php</div>
-			<div class="card-body p-4">
+			<div class="card-body px-2 py-1">
 				<pre class="line-numbers" data-line="56" data-start="45" data-line-offset="45"><code class="language-php">
 		/**
 		 * $App->route() takes the $Painfree->route value and attempts
@@ -301,11 +298,32 @@
 			method does the next four pieces of magic in a few short lines of code.
 		</p>
 		<ol>
-			<li>Check if there is a controller script defined for <code>$App->view</code>.
+			<li>
+				Store a copy of the request headers into <code>$App->headers[]</code>.
+			</li>
+			<li>
+				Check for a <code>$headers['X-TZ-OFFSET']</code> or <code>$_REQUEST['tz_offset']</code> 
+				timezone offset (in minutes).
+			</li>
+			<li>Check if there is either an app controller or a default controller defined for <code>$App->view</code>.
 				<ul>
 					<li class="ms-4"><strong>If Controller Exists</strong>, load and execute the controller script.</li>
 					<li class="ms-4"><strong>If No Controller</strong>, send a HTTP 404 status code.</li>
 				</ul>
+			</li>
+			<li>
+				<strong>Fast API Support</strong>
+				- Check the request headers to see if <code>Content-Type</code> is
+				set to "application/json" or a query parameter of <code>?json</code>
+				was sent with the URL, and if so, set the response Content-Type and 
+				immediately die and send back the contents of <code class="language-php">$this->data</code>
+				encoded as JSON.
+			</li>
+			<li>
+				<strong>Generate Comma-Separated Values (CSV) Outputs</strong>
+				- If <code>?csv</code> is passed in as a query parameter and 
+				there is tabular data stored in <code>$App->data['records']</code>, 
+				automatically generate a CSV and send it to the user as a download.
 			</li>
 			<li>
 				<strong>htmx Support [partials]</strong>
@@ -317,40 +335,67 @@
 				- Check the Request Headers to see if <code>HX-Boosted</code> is set 
 				and set a boolean for our templates to use.
 			</li>
-			<li>
-				<strong>Fast API Support</strong>
-				- Check the request headers to see if <code>Content-Type</code> is
-				set to "application/json" or a query parameter of <code>?json</code>
-				was sent with the URL, and if so, set the response Content-Type and 
-				immediately die and send back the contents of <code class="language-php">$this->data</code>
-				encoded as JSON.
-			</li>
 		</ol>
 	</div>
 	<div class="col-lg-6">
 		<div class="card bg-dark border-warning mb-4">
 			<div class="card-header">includes/App.php</div>
-			<div class="card-body p-4">
-				<pre class="line-numbers" data-start="58" data-line-offset="58"><code class="language-php">
-			header('X-Frame-Options: SAMEORIGIN');
+			<div class="card-body px-2 py-1">
+				<pre class="line-numbers" data-start="137" data-line-offset="58"><code class="language-php">
+			$headers = apache_request_headers();
+			$this->headers = $headers;
+			
+			$tz_offset = $headers['X-TZ-OFFSET'] ?? nullintparam('tz_offset');
+			if ( $tz_offset ) {
+				$_SESSION['tz_offset'] = $tz_offset;
+			}
 
-			if (file_exists("{$this->BASE_PATH}/includes/Controllers/{$this->view}.php")) {
-				require_once "Controllers/{$this->view}.php";
+			// if you need to allow your website to be embeddable into another
+			// website via iframe, disable this X-Frame-Options header.
+			$this->response_header('X-Frame-Options', 'SAMEORIGIN');
 
-				$headers = apache_request_headers();
-				if ( isset($headers['HX-Request']) && 
-					$headers['HX-Request'] === 'true' ) {
+			$app_controller  = "{$this->BASE_PATH}/apps/{$this->view}/controllers/{$this->view}.php";
+			$view_controller = "{$this->BASE_PATH}/includes/Controllers/{$this->view}.php";
+
+			$found_controller = false;
+			if ( file_exists($app_controller) ) {
+				$found_controller = $app_controller;
+				$this->app = $this->view;
+
+				// execute the controller
+				require_once $app_controller;
+			} else if ( file_exists($view_controller) ) {
+				$found_controller = $app_controller;
+
+				// execute the controller
+				require_once $view_controller;
+			}
+
+			if ($found_controller) {
+				// Process and handle JSON API Requests
+				if ( $this->json_request() ) {
+					$this->response_header('Content-Type', 'application/json; charset=utf-8');
+
+					// JSON output exits early, so we need to send response headers 
+					// before creating output
+					$this->__send_response_headers();
+
+					die(json_encode($this->data));
+				}
+
+				// CSV output is natively provided to any array stored in 
+				// $App->data['records']
+				// This array is assumed to be an array of associative arrays 
+				// with [ [ 'key' => 'val', 'key2' => 'val2' ], ...]
+				if ( $this->csv_request() ) {
+					$this->__generate_csv_and_quit();	
+				}
+
+				if ( isset($headers['HX-Request']) && $headers['HX-Request'] === 'true' ) {
 					$this->htmx = true;
 				}
-				if ( isset($headers['HX-Boosted']) && 
-					$headers['HX-Boosted'] === 'true' 
-				) {
+				if ( isset($headers['HX-Boosted']) && $headers['HX-Boosted'] === 'true' ) {
 					$this->htmx_boosted = true;
-				}
-				if ( isset($headers['Content-Type']) && 
-					$headers['Content-Type'] === 'application/json' ) {
-					header('Content-Type: application/json; charset=utf-8');
-					die(json_encode($this->data));
 				}
 			} else {
 				header('HTTP/1.0 404 Not Found');
@@ -387,7 +432,7 @@
 	</div>
 	<div class="col-lg-6">
 		<div class="card bg-dark border-warning mb-4">
-			<div class="card-body p-4">
+			<div class="card-body px-2 py-1">
 <pre data-line="7" data-line-offset="2" data-start="2"><code class="language-treeview">PHPainfree/
 |-- htdocs/
 |-- includes/
@@ -400,7 +445,7 @@
 		</div>
 		<div class="card bg-dark border-warning mb-4">
 			<div class="card-header">templates/app.php</div>
-			<div class="card-body p-4">
+			<div class="card-body px-2 py-1">
 
 <pre class="line-numbers"><code class="language-php">
 &lt;?php
@@ -482,7 +527,7 @@ if (
 	<div class="col-lg-6">
 		<div class="card bg-dark border-warning mb-4">
 			<div class="card-header">templates/app.php</div>
-			<div class="card-body p-4">
+			<div class="card-body px-2 py-1">
 
 <pre class="line-numbers" data-start="66"><code class="language-php">
 	&lt;body id="app-body" class="bg-dark text-light">

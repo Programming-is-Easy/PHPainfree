@@ -1,4 +1,6 @@
 <?php
+	$App = get_App();
+	
 	$file_path = "{$App->BASE_PATH}/templates/views/examples/{$App->data['example']}.php";
 	if ( $App->htmx && ! $App->htmx_boosted && file_exists($file_path) ) {
 		include_once "examples/{$App->data['doc']}.php";
@@ -42,7 +44,11 @@
 					<div class="col-lg-2 bg-dark pt-1">
 						<div class="bg-dark sticky-top p-2 overflow-auto pt-4" style="top:4.2em;">
 							<h4>PHPainfree<code>2</code></h4>
-							<ul class="fs-5" id="painfree_navigation_links" hx-on:click="htmx.findAll('li.nav-item.active').forEach(el => htmx.removeClass(el, 'active'));">
+							<ul
+								class="fs-5"
+								id="painfree_navigation_links"
+								hx-on:click="htmx.findAll('li.nav-item.active').forEach(el => htmx.removeClass(el, 'active'));"
+							>
 								<li class="nav-item <?= $App->data['example'] === 'default' ? 'active' : ''; ?>">
 									<a class="nav-link d-inline-block"
 										href="/examples/default"
@@ -51,6 +57,11 @@
 										hx-push-url="true"
 										hx-on::after-request="htmx.addClass(htmx.closest(this,'li'),'active');Prism.highlightAll();"
 									>Overview</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link d-inline-block"
+										href="/test"
+									>App-Based Routing</a>
 								</li>
 							</ul>
 						</div>
